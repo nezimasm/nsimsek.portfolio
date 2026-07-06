@@ -3125,14 +3125,36 @@ function CategoryViewInner({ categoryId, onBack }: CategoryViewProps) {
         </div>
 
         <div className={`relative group/carousel w-full max-w-[774px] mx-auto aspect-[774/530] bg-white/[0.01] border border-white/5 ${img ? '' : 'hover:border-[#FF6B00]/20'} rounded-2xl overflow-hidden transition-all duration-500 flex flex-col items-center justify-center shadow-2xl`}>
-          {img ? (
-            <div 
-              onClick={isLocked ? undefined : () => {
-                currentUploadSlot.current = { type: 'images',
-                  </motion.button>
-            </div>
-
-            {/* Heading styled with creative bold straight font for titles, and elegant small descriptions */}
+            {img ? (
+              <div 
+                onClick={isLocked ? undefined : () => {
+                  currentUploadSlot.current = { type: 'images', key: slideKey };
+                  socialSingleFileInputRef.current?.click();
+                }}
+                className={`absolute inset-0 w-full h-full ${isLocked ? 'cursor-default' : 'cursor-pointer'} group/slide`}
+              >
+                <img 
+                  src={img} 
+                  alt={`${prefix} Campaign Visual`} 
+                  className="w-full h-full object-cover transition-transform duration-500 group-hover/slide:scale-102"
+                  referrerPolicy="no-referrer"
+                />
+              </div>
+            ) : (
+              <div 
+                onClick={isLocked ? undefined : () => {
+                  currentUploadSlot.current = { type: 'images', key: slideKey };
+                  socialSingleFileInputRef.current?.click();
+                }}
+                className={`absolute inset-0 flex flex-col items-center justify-center p-12 text-center ${isLocked ? 'cursor-default' : 'cursor-pointer hover:bg-[#FF6B00]/[0.02]'} select-none`}
+              >
+                <div className="w-12 h-12 rounded-full bg-white/[0.02] flex items-center justify-center border border-white/5 transition-all mb-3">
+                  <Upload className="w-5 h-5 text-white/40" />
+                </div>
+                <span className="font-sans text-[10px] text-white/40 tracking-widest uppercase font-black select-none">// GÖRSEL BULUNMAMAKTADIR</span>
+              </div>
+            )}
+          </div>                      {/* Heading styled with creative bold straight font for titles, and elegant small descriptions */}
             <div className="mb-16 border-b border-white/5 pb-12">
               <span className="font-mono text-[10px] tracking-[0.3em] uppercase font-bold block mb-4 animate-fade-in" style={{ color: catHeading.color }}>
                 {catHeading.section}
