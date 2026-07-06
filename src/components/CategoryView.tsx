@@ -3456,7 +3456,6 @@ function CategoryViewInner({ categoryId, onBack }: CategoryViewProps) {
                 );
               })}
             </div> 
-            </div>
           </motion.div>
         );
       }
