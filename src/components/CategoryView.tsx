@@ -3440,35 +3440,27 @@ function CategoryViewInner({ categoryId, onBack }: CategoryViewProps) {
                       </h3>
                     </div>
 
-                    {/* Group Grid of 6 images */}
-                    <div className="grid grid-cols-2 sm:grid-cols-3 gap-4 mb-6">
-                      {Array.from({ length: 6 }).map((_, i) => {
-                        const imgNum = i + 28;
-                        const ext = (imgNum === 28 || imgNum === 29) ? 'jpg' : 'png';
-                        return (
-                          <div key={imgNum} className="relative overflow-hidden rounded-xl bg-[#121214] aspect-square">
-                            <img src={`/uploaded/veri-bilimi-toplulugu/${imgNum}.${ext}`} alt={`Egitim ${imgNum}`} className="w-full h-full object-cover" />
-                          </div>
-                        );
-                      })}
-                    </div>
-
-                    {/* Bottom Single Description */}
-                    <div className="border-t border-white/5 pt-4">
-                      <p className="font-sans text-white/70 text-xs sm:text-sm leading-relaxed text-left">
-                        Kaggle, Excel and LinkedIn eğitimleri gibi odaklanmış içeriklerde; geniş yazı blokları, blok renk geçişleri and konuşmacıyı ön plana çıkaran dairesel çerçeveler kullanarak sosyal medya akışında yüksek okunabilirlik sağlayan net bir hiyerarşi kurdum.
-                      </p>
-                    </div>
+{/* Group Grid of 6 images */}
+<div className="grid grid-cols-2 sm:grid-cols-3 gap-4 mb-6">
+              {Array.from({ length: 6 }).map((_, i) => {
+                const imgNum = i + 1 + 28;
+                const ext = (imgNum === 28 || imgNum === 29) ? 'jpg' : 'png';
+                return (
+                  <div key={imgNum} className="relative overflow-hidden rounded-xl bg-[#121214] aspect-square">
+                    <img 
+                      src={`/uploaded/veri-bilimi-toplulugu/${imgNum}.${ext}`} 
+                      alt={`Egitim ${imgNum}`} 
+                      className="w-full h-full object-cover" 
+                    />
                   </div>
-                </motion.div>
-              )}
+                );
+              })}
             </div>
-          </div>
-        </div>
-      </div>
-    );
-  }
-  
+          </motion.div>
+        );
+      }
+    }
+  };  
   if (categoryId === 'magazine') {
     const currentIssueConfig = magazineIssuesConfig.find(item => item.id === magazineData.activeIssue) || magazineIssuesConfig[0];
     const activeViewIdx = magazineData.activeViewIdxs[`mag_issue_${magazineData.activeIssue}`] || 0;
@@ -6055,7 +6047,7 @@ if (categoryId === 'social-media') {
                   {tab.toUpperCase()}
                 </span>
               </div>
-            ));}
+            ))}
           </div>
         </div>
 
