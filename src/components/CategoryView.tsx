@@ -582,17 +582,32 @@ function AssetsManifestProvider({ children }: { children: React.ReactNode }) {
     // then fall back to /api/assets-manifest or empty object
     fetch(`/uploaded/assets_manifest.json?t=${Date.now()}`)
       .then(res => {
-        if (res.ok) return res.json();
-        return fetch(`/api/assets-manifest?t=${Date.now()}`).then(r => r.ok ? r.json() : {});
+        const contentType = res.headers.get('content-type') || '';
+        if (res.ok && contentType.includes('application/json')) {
+          return res.json();
+        }
+        return fetch(`/api/assets-manifest?t=${Date.now()}`).then(r => {
+          const rType = r.headers.get('content-type') || '';
+          if (r.ok && rType.includes('application/json')) {
+            return r.json();
+          }
+          return {};
+        });
       })
       .then(data => {
         setManifest(data || {});
-        setIsLoaded(true);
+        setIsLoaded(true)
       })
       .catch(err => {
         console.warn('Failed to load static assets manifest, trying fallback:', err);
         fetch(`/api/assets-manifest?t=${Date.now()}`)
-          .then(res => res.ok ? res.json() : {})
+          .then(res => {
+            const contentType = res.headers.get('content-type') || '';
+            if (res.ok && contentType.includes('application/json')) {
+              return res.json();
+            }
+            return {};
+          })
           .then(data => {
             setManifest(data || {});
             setIsLoaded(true);
