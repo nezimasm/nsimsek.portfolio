@@ -3465,10 +3465,10 @@ function CategoryViewInner({ categoryId, onBack }: CategoryViewProps) {
 
 </div>
 
-</motion.div>        );
-      }
-
-  if (categoryId === 'magazine') {
+                </motion.div>
+              );
+              }  
+              if (categoryId === 'magazine') {
     const currentIssueConfig = magazineIssuesConfig.find(item => item.id === magazineData.activeIssue) || magazineIssuesConfig[0];
     const activeViewIdx = magazineData.activeViewIdxs[`mag_issue_${magazineData.activeIssue}`] || 0;
     const currentView = currentIssueConfig.views[activeViewIdx] || currentIssueConfig.views[0];
