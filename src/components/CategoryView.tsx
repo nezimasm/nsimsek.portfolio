@@ -3455,12 +3455,12 @@ function CategoryViewInner({ categoryId, onBack }: CategoryViewProps) {
                   </div>
                 );
               })}
+            </div> 
             </div>
           </motion.div>
         );
       }
-    }
-  };  
+
   if (categoryId === 'magazine') {
     const currentIssueConfig = magazineIssuesConfig.find(item => item.id === magazineData.activeIssue) || magazineIssuesConfig[0];
     const activeViewIdx = magazineData.activeViewIdxs[`mag_issue_${magazineData.activeIssue}`] || 0;
