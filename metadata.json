@@ -1,0 +1,6 @@
+{
+  "name": "Neziha Şimşek Portfolio",
+  "description": "Premium personal portfolio for Communication Designer Neziha Şimşek, inspired by Apple and Awwwards design aesthetics.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
