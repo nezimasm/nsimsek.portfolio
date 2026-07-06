@@ -3455,9 +3455,17 @@ function CategoryViewInner({ categoryId, onBack }: CategoryViewProps) {
                   </div>
                 );
               })}
-            </div> 
-          </motion.div>
-        );
+</div>
+
+<div className="border-t border-white/5 pt-4">
+  <p className="font-sans text-white/70 text-xs sm:text-sm leading-relaxed text-left">
+    Veri Bilimi Topluluğu bünyesinde düzenlenen eğitim serileri ve teknik atölyeler için hazırlanan bu tasarımlar, katılımcılara profesyonel ve tutarlı bir görsel deneyim sunmayı amaçladı.
+  </p>
+</div>
+
+</div>
+
+</motion.div>        );
       }
 
   if (categoryId === 'magazine') {
