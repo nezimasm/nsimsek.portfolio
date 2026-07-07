@@ -827,7 +827,7 @@ function CategoryViewInner({ categoryId, onBack }: CategoryViewProps) {
           part1: 'FOTOĞRAFÇILIK',
           part2: 'Serileri',
           color: '#10B981',
-          desc: 'Işık-gölge dramaturjisi, dikey kadraj mizanpajı and sayfa ritmiyle kurgulanmış 5 adet fotoroman sergisi. Her fotoromanın bir ana A5 kapak görseli and yanında 3-4 adet sayfa örneği bulunur. Sayfalara basarak onları ana odak alanına getirebilir, kendi görsellerinizi yüklemek için üstlerindeki yükle butonuna tıklayabilirsiniz.'
+          desc: 'Fotoroman, fotoğraf ve tipografiyi anlatının temel unsurları olarak kullanan, görsel hikâye anlatıcılığına odaklanan bir editoryal tasarım projesidir. Bu çalışma kapsamında hikâyenin akışını destekleyen sayfa düzeni, tipografik hiyerarşi ve görsel kompozisyonu bir arada ele alarak okuyucunun anlatıyı kesintisiz takip edebileceği bir mizanpaj kurguladım. Fotoğraf kareleri ile metin arasındaki dengeyi koruyarak sinematik bir okuma deneyimi sunmayı hedefledim.'
         };
       case 'magazine':
         return {
