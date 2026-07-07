@@ -5251,11 +5251,11 @@ function CategoryViewInner({ categoryId, onBack }: CategoryViewProps) {
           const chocolateBoxUrl1 = appsData.images['apps_cikolata_1'] || '/uploaded/kutu/dıs.jpeg';
           const chocolateBoxUrl2 = appsData.images['apps_cikolata_2'] || '/uploaded/kutu/ic.jpeg';
 
-          const baseTakvimPhotoUrl = appsData?.images?.['apps_takvim_foto'] || '/uploaded/takvim/takim-fiziki.jpeg';
-          const takvimPhotoUrl = baseTakvimPhotoUrl ? `${baseTakvimPhotoUrl}` : '';
+          const baseTakvimPhotoUrl = '/uploaded/takvim/takim-fiziki.jpeg';
+          const takvimPhotoUrl = baseTakvimPhotoUrl;
 
-          const baseTakvimBackdropUrl = appsData?.images?.['apps_takvim_backdrop'] || '/uploaded/takvim/takvim-arkaplan.png';
-          const takvimBackdropUrl = baseTakvimBackdropUrl ? `${baseTakvimBackdropUrl}` : '';
+          const baseTakvimBackdropUrl = '/uploaded/takvim/takvim-arkaplan.png';
+          const takvimBackdropUrl = baseTakvimBackdropUrl;
 
           const correctSliderIndex = (6 - targetDayIndex + 7) % 7;
           const isCalendarMatched = calendarUserDayIndex === correctSliderIndex;
