@@ -1799,10 +1799,12 @@ function CategoryViewInner({ categoryId, onBack }: CategoryViewProps) {
     try {
       const cachedImages = loadCachedAssets('asset_magazine_');
       const saved = localStorage.getItem('magazine_assets_v2');
+      const CURRENT_DESCRIPTION = "Gürbüz, adını Dağlarda Gürbüz Bir Ölümdür Bizim Arkadaşların Kedisi dizesinden alan; kültür, sanat ve edebiyat odağında yayın yapan bağımsız bir dergidir. Derginin mottosu olan \"Kaousun Ortasında Bir Gürbüz Ağacıdır\", üretimin, düşüncenin ve edebiyatın kök salan yapısını simgelemektedir. Bu proje kapsamında derginin toplam beş sayısının görsel kimliği ile editoryal mizanpaj tasarımını üstlendim. Her sayıda içerik hiyerarşisini güçlendiren, okunabilirliği ön planda tutan ve derginin edebi karakterini yansıtan özgün bir tasarım dili oluşturarak yayın sürecine bütüncül bir görsel yaklaşım kazandırdım.";
       if (saved) {
         const parsed = JSON.parse(saved);
         return {
           ...parsed,
+          description: CURRENT_DESCRIPTION,
           images: {
             ...MAGAZINE_DEFAULT_IMAGES,
             ...cachedImages,
@@ -1820,7 +1822,7 @@ function CategoryViewInner({ categoryId, onBack }: CategoryViewProps) {
           "mag_issue_5": 0,
         },
         activeIssue: 1,
-        description: "Gürbüz, adını Dağlarda Gürbüz Bir Ölümdür Bizim Arkadaşların Kedisi dizesinden alan; kültür, sanat ve edebiyat odağında yayın yapan bağımsız bir dergidir. Derginin mottosu olan \"Kaousun Ortasında Bir Gürbüz Ağacıdır\", üretimin, düşüncenin ve edebiyatın kök salan yapısını simgelemektedir. Bu proje kapsamında derginin toplam beş sayısının görsel kimliği ile editoryal mizanpaj tasarımını üstlendim. Her sayıda içerik hiyerarşisini güçlendiren, okunabilirliği ön planda tutan ve derginin edebi karakterini yansıtan özgün bir tasarım dili oluşturarak yayın sürecine bütüncül bir görsel yaklaşım kazandırdım.",
+        description: CURRENT_DESCRIPTION,
         isEditingDesc: false
       };
     } catch (e) {
@@ -5255,7 +5257,8 @@ function CategoryViewInner({ categoryId, onBack }: CategoryViewProps) {
           const baseTakvimBackdropUrl = appsData?.images?.['apps_takvim_backdrop'] || '/uploaded/takvim/takvim-arkaplan.png';
           const takvimBackdropUrl = baseTakvimBackdropUrl ? `${baseTakvimBackdropUrl}` : '';
 
-          const isCalendarMatched = calendarUserDayIndex === targetDayIndex;
+          const correctSliderIndex = (6 - targetDayIndex + 7) % 7;
+          const isCalendarMatched = calendarUserDayIndex === correctSliderIndex;
           return (
           <div className="relative min-h-screen bg-[#070707] text-white overflow-hidden animate-fadeIn">
             <input
@@ -5521,7 +5524,7 @@ function CategoryViewInner({ categoryId, onBack }: CategoryViewProps) {
 
                     <div className="grid grid-cols-2 gap-2 mt-1">
                       <button
-                        onClick={() => setCalendarUserDayIndex(targetDayIndex)}
+                        onClick={() => setCalendarUserDayIndex(correctSliderIndex)}
                         className="bg-[#00F0FF]/15 hover:bg-[#00F0FF]/25 text-[#00F0FF] border border-[#00F0FF]/20 rounded-xl py-2 px-3 text-[10px] font-mono font-bold tracking-widest uppercase transition-all flex items-center justify-center gap-1.5 cursor-pointer"
                         title="Sürgüyü o ayın ilk gününe otomatik eşitler"
                       >
@@ -5534,20 +5537,6 @@ function CategoryViewInner({ categoryId, onBack }: CategoryViewProps) {
                       >
                         {hideCalendarTexts ? <EyeOff className="w-3.5 h-3.5" /> : <Eye className="w-3.5 h-3.5" />}
                         <span>{hideCalendarTexts ? "Sayıları Aç" : "Sayıları Gizle"}</span>
-                      </button>
-                    </div>
-
-                    <div className="flex flex-col gap-1.5 border-t border-white/5 pt-4">
-                      <label className="font-mono text-[9px] text-white/40 uppercase tracking-widest">ŞABLON ARKA PLANI GÖRSELİ</label>
-                      <button
-                        onClick={() => {
-                          currentAppsUploadSlot.current = 'apps_takvim_backdrop';
-                          appsFileInputRef.current?.click();
-                        }}
-                        className="bg-white/5 hover:bg-white/10 text-white border border-white/10 rounded-xl py-2 px-3 text-[10px] font-mono font-bold tracking-widest uppercase transition-all flex items-center justify-center gap-2 cursor-pointer"
-                      >
-                        <Upload className="w-3.5 h-3.5" />
-                        <span>Arka Plan Görseli Yükle</span>
                       </button>
                     </div>
 
@@ -5585,18 +5574,6 @@ function CategoryViewInner({ categoryId, onBack }: CategoryViewProps) {
                       />
 
                       <div className="absolute inset-0 bg-gradient-to-tr from-transparent via-white/[0.05] to-white/[0.12] pointer-events-none z-20" />
-
-                      <button
-                        onClick={(e) => {
-                          e.stopPropagation();
-                          currentAppsUploadSlot.current = 'apps_takvim_backdrop';
-                          appsFileInputRef.current?.click();
-                        }}
-                        className="absolute top-4 right-4 z-30 bg-black/70 backdrop-blur-md hover:bg-[#00F0FF] hover:text-black hover:scale-105 border border-white/10 text-white font-mono text-[8px] tracking-widest uppercase py-1.5 px-3 rounded-lg flex items-center gap-1.5 opacity-0 group-hover:opacity-100 cursor-pointer transition-all shadow-xl"
-                      >
-                        <Upload className="w-3 h-3" />
-                        <span>Arka Plan Yükle</span>
-                      </button>
 
                       <div className="absolute top-[13%] left-[21.5%] right-[24.5%] h-[28px] flex items-center justify-between z-10 px-2 select-none">
                         <div className="relative w-full h-full flex items-center justify-between font-sans font-semibold tracking-wider">
@@ -5693,7 +5670,7 @@ function CategoryViewInner({ categoryId, onBack }: CategoryViewProps) {
                                 ? 'bg-[#10B981]/25 border-[#10B981]/30'
                                 : 'bg-[#00F0FF]/25 border-[#00F0FF]/30'
                               }`}
-                            style={{ height: '25%' }}
+                            style={{ height: '32%' }}
                           >
                             {["PZT", "SAL", "ÇAR", "PER", "CUM", "CMT", "PAZ"].map((day, dIdx) => (
                               <div
@@ -5710,7 +5687,7 @@ function CategoryViewInner({ categoryId, onBack }: CategoryViewProps) {
                                 ? 'border-[#10B981]/25 bg-transparent'
                                 : 'border-[#00F0FF]/25 bg-transparent'
                               }`}
-                            style={{ height: '65%' }}
+                            style={{ height: '58%' }}
                           >
                             <div className="absolute inset-0 bg-gradient-to-tr from-transparent via-white/[0.02] to-white/[0.08]" />
                           </div>
@@ -5786,17 +5763,6 @@ function CategoryViewInner({ categoryId, onBack }: CategoryViewProps) {
                         </span>
                       </div>
                     )}
-
-                    <div
-                      onClick={() => {
-                        currentAppsUploadSlot.current = 'apps_takvim_foto';
-                        appsFileInputRef.current?.click();
-                      }}
-                      className="absolute top-4 right-4 bg-black/60 backdrop-blur-md hover:bg-white hover:text-black hover:scale-105 border border-white/10 text-white font-mono text-[8px] tracking-widest uppercase py-1.5 px-3 rounded-lg flex items-center gap-1.5 cursor-pointer transition-all shadow-xl z-20"
-                    >
-                      <Upload className="w-3 h-3" />
-                      <span>Fotoğraf Yükle</span>
-                    </div>
                   </div>
 
                   <div className="w-full flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 border-t border-white/5 pt-4">
