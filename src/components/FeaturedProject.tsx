@@ -308,9 +308,13 @@ export default function FeaturedProject() {
               {/* Grid Background */}
               <div className="absolute inset-0 opacity-[0.03] bg-[linear-gradient(to_right,#808080_1px,transparent_1px),linear-gradient(to_bottom,#808080_1px,transparent_1px)] bg-[size:24px_24px] pointer-events-none" />
 
-              {/* Simulated QR Code placeholder illustration */}
+              {/* Real QR Code image (transparent background) */}
               <div className="relative p-6 bg-white/[0.02] border border-white/10 group-hover:border-[#2E5BFF]/30 rounded-2xl flex items-center justify-center transition-all duration-500 shadow-2xl">
-                <YapayZekaDegerlerQR className="w-44 h-44" />
+                <img
+                  src="/uploaded/yapay-zeka-degerler-karekod.png"
+                  alt="Yapay Zeka Değerler Videosu Karekodu"
+                  className="w-44 h-44 object-contain"
+                />
                 
                 {/* Scan Laser beam */}
                 <motion.div 

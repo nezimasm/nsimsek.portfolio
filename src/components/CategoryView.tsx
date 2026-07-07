@@ -835,7 +835,7 @@ function CategoryViewInner({ categoryId, onBack }: CategoryViewProps) {
           part1: 'GÜRBÜZ',
           part2: 'Dergisi',
           color: '#A78BFA',
-          desc: 'Gürbüz, kaosun ortasında bir gürbüz ağacı mottosuyla iki ayda bir yayımlanan bir kültür, sanat and edebiyat dergisidir. Adını bir şiirde geçen "gürz" kelimesinden alan dergimizin yayımlanmış olan toplam 5 sayısının tamamının görsel and editoryal mizanpaj tasarımı bana aittir.'
+          desc: 'Gürbüz, adını Dağlarda Gürbüz Bir Ölümdür Bizim Arkadaşların Kedisi dizesinden alan; kültür, sanat ve edebiyat odağında yayın yapan bağımsız bir dergidir. Derginin mottosu olan "Kaousun Ortasında Bir Gürbüz Ağacıdır", üretimin, düşüncenin ve edebiyatın kök salan yapısını simgelemektedir. Bu proje kapsamında derginin toplam beş sayısının görsel kimliği ile editoryal mizanpaj tasarımını üstlendim. Her sayıda içerik hiyerarşisini güçlendiren, okunabilirliği ön planda tutan ve derginin edebi karakterini yansıtan özgün bir tasarım dili oluşturarak yayın sürecine bütüncül bir görsel yaklaşım kazandırdım.'
         };
       case 'products':
         return {
@@ -1820,7 +1820,7 @@ function CategoryViewInner({ categoryId, onBack }: CategoryViewProps) {
           "mag_issue_5": 0,
         },
         activeIssue: 1,
-        description: "Gürbüz, kaosun ortasında bir gürz ağacı mottosuyla iki ayda bir yayımlanan bir kültür, sanat and edebiyat dergisidir. Adını bir şiirde geçen \"gürz\" kelimesinden alan dergimizin yayımlanmış olan toplam 5 sayısının tamamının görsel and editoryal mizanpaj tasarımı bana aittir.",
+        description: "Gürbüz, adını Dağlarda Gürbüz Bir Ölümdür Bizim Arkadaşların Kedisi dizesinden alan; kültür, sanat ve edebiyat odağında yayın yapan bağımsız bir dergidir. Derginin mottosu olan \"Kaousun Ortasında Bir Gürbüz Ağacıdır\", üretimin, düşüncenin ve edebiyatın kök salan yapısını simgelemektedir. Bu proje kapsamında derginin toplam beş sayısının görsel kimliği ile editoryal mizanpaj tasarımını üstlendim. Her sayıda içerik hiyerarşisini güçlendiren, okunabilirliği ön planda tutan ve derginin edebi karakterini yansıtan özgün bir tasarım dili oluşturarak yayın sürecine bütüncül bir görsel yaklaşım kazandırdım.",
         isEditingDesc: false
       };
     } catch (e) {
@@ -1836,7 +1836,7 @@ function CategoryViewInner({ categoryId, onBack }: CategoryViewProps) {
         "mag_issue_5": 0,
       },
       activeIssue: 1,
-      description: "Gürbüz, kaosun ortasında bir gürz ağacı mottosuyla iki ayda bir yayımlanan bir kültür, sanat and edebiyat dergisidir. Adını bir şiirde geçen \"gürz\" kelimesinden alan dergimizin yayımlanmış olan toplam 5 sayısının tamamının görsel and editoryal mizanpaj tasarımı bana aittir.",
+      description: "Gürbüz, adını Dağlarda Gürbüz Bir Ölümdür Bizim Arkadaşların Kedisi dizesinden alan; kültür, sanat ve edebiyat odağında yayın yapan bağımsız bir dergidir. Derginin mottosu olan \"Kaousun Ortasında Bir Gürbüz Ağacıdır\", üretimin, düşüncenin ve edebiyatın kök salan yapısını simgelemektedir. Bu proje kapsamında derginin toplam beş sayısının görsel kimliği ile editoryal mizanpaj tasarımını üstlendim. Her sayıda içerik hiyerarşisini güçlendiren, okunabilirliği ön planda tutan ve derginin edebi karakterini yansıtan özgün bir tasarım dili oluşturarak yayın sürecine bütüncül bir görsel yaklaşım kazandırdım.",
       isEditingDesc: false
     };
   });
