@@ -17,7 +17,7 @@ export default function Contact() {
       id: '02',
       channelName: 'LINKEDIN',
       label: 'BAĞLANTI KURUN',
-      value: 'linkedin.com/in/neziha-ş-763139294',
+      value: 'Neziha Şimşek',
       href: 'https://www.linkedin.com/in/neziha-%C5%9F-763139294/',
       icon: <Linkedin className="w-4 h-4 text-[#3B82F6]" />,
       color: 'rgba(59, 130, 246, 0.08)',

@@ -910,13 +910,13 @@ function CategoryViewInner({ categoryId, onBack }: CategoryViewProps) {
   const rdDirection2FileInputRef = useRef<HTMLInputElement>(null);
 
   const [rdThemeImage, setRdThemeImage] = usePersistentState('rdThemeImage', '/uploaded/organizasyonel-tasarim/rd-techathon/tasarım-kimligi.png');
-  const [rdSection1Image, setRdSection1Image] = usePersistentState('rdSection1Image');
+  const [rdSection1Image, setRdSection1Image] = usePersistentState('rdSection1Image', '/uploaded/organizasyonel-tasarim/rd-techathon/tasarım-kimligi.png');
   const [rdSection2Image, setRdSection2Image] = usePersistentState('rdSection2Image');
   const [rdSection3Image, setRdSection3Image] = usePersistentState('rdSection3Image');
   const [rdSection4Image, setRdSection4Image] = usePersistentState('rdSection4Image');
   const [rdYakaKartiFrontImage, setRdYakaKartiFrontImage] = usePersistentState('rdYakaKartiFrontImage', '/uploaded/organizasyonel-tasarim/rd-techathon/yaka-kartı-on.png');
   const [rdYakaKartiBackImage, setRdYakaKartiBackImage] = usePersistentState('rdYakaKartiBackImage', '/uploaded/organizasyonel-tasarim/rd-techathon/yaka-kartı-arka.png');
-  const [rdVideoUrl, setRdVideoUrl] = usePersistentState('rdVideoUrl', null);
+  const [rdVideoUrl, setRdVideoUrl] = usePersistentState('rdVideoUrl', '/uploaded/organizasyonel-tasarim/rd-techathon/yarısmacı-tanıtım-videosu.mp4');
   const [rdStickerImage, setRdStickerImage] = usePersistentState('rdStickerImage', '/uploaded/organizasyonel-tasarim/rd-techathon/sticker-seti.png');
   const [rdTshirtFrontImage, setRdTshirtFrontImage] = usePersistentState('rdTshirtFrontImage', '/uploaded/organizasyonel-tasarim/rd-techathon/tisort-tasarımı-on.jpeg');
   const [rdTshirtBackImage, setRdTshirtBackImage] = usePersistentState('rdTshirtBackImage', '/uploaded/organizasyonel-tasarim/rd-techathon/tisort-tasarımı-arka.jpeg');
@@ -1630,7 +1630,7 @@ function CategoryViewInner({ categoryId, onBack }: CategoryViewProps) {
   const isLocked = true;
   const [degerlerKalbiImage, setDegerlerKalbiImage] = usePersistentState('degerlerKalbiImage', '/uploaded/organizasyonel-tasarim/degerler-lansmani/degerler-kalbi.png');
   const [degerlerKitiImage, setDegerlerKitiImage] = usePersistentState('degerlerKitiImage', '/uploaded/organizasyonel-tasarim/degerler-lansmani/degerler-kiti.jpeg');
-  const [degerlerKitiBannerImage, setDegerlerKitiBannerImage] = usePersistentState('degerlerKitiBannerImage', '/uploaded/organizasyonel-tasarim/degerler-lansmani/geometric-pattern-divider.png');
+  const [degerlerKitiBannerImage, setDegerlerKitiBannerImage] = usePersistentState('degerlerKitiBannerImage');
   const [kitDefterImage, setKitDefterImage] = usePersistentState('kitDefterImage', '/uploaded/organizasyonel-tasarim/degerler-lansmani/kitin-ici-gorunumu.png');
   const [kitStickerImage, setKitStickerImage] = usePersistentState('kitStickerImage', '/uploaded/organizasyonel-tasarim/degerler-lansmani/sticker_ceti.png');
   const [identityFontImage, setIdentityFontImage] = usePersistentState('identityFontImage');
@@ -1665,19 +1665,19 @@ function CategoryViewInner({ categoryId, onBack }: CategoryViewProps) {
   const [placardAlt9Image, setPlacardAlt9Image] = usePersistentState('placardAlt9Image');
   const [placardAlt10Image, setPlacardAlt10Image] = usePersistentState('placardAlt10Image');
 
-  const [interactivePlacard1Image, setInteractivePlacard1Image] = usePersistentState('interactivePlacard1Image', null);
-  const [interactivePlacard2Image, setInteractivePlacard2Image] = usePersistentState('interactivePlacard2Image', null);
-  const [interactivePlacard3Image, setInteractivePlacard3Image] = usePersistentState('interactivePlacard3Image', null);
-  const [interactivePlacard4Image, setInteractivePlacard4Image] = usePersistentState('interactivePlacard4Image', null);
+  const [interactivePlacard1Image, setInteractivePlacard1Image] = usePersistentState('interactivePlacard1Image', '/uploaded/organizasyonel-tasarim/degerler-lansmani/el-pankartı-1.png');
+  const [interactivePlacard2Image, setInteractivePlacard2Image] = usePersistentState('interactivePlacard2Image', '/uploaded/organizasyonel-tasarim/degerler-lansmani/el-pankartı-2.png');
+  const [interactivePlacard3Image, setInteractivePlacard3Image] = usePersistentState('interactivePlacard3Image', '/uploaded/organizasyonel-tasarim/degerler-lansmani/el-pankartı-3.png');
+  const [interactivePlacard4Image, setInteractivePlacard4Image] = usePersistentState('interactivePlacard4Image', '/uploaded/organizasyonel-tasarim/degerler-lansmani/el-pankartı-4.png');
   const [activeInteractivePlacard, setActiveInteractivePlacard] = useState<number>(1);
   const [activeCampaignSlide, setActiveCampaignSlide] = useState<number>(1);
   const [socialVideoLikes, setSocialVideoLikes] = useState<number>(1248);
   const [isSocialVideoLiked, setIsSocialVideoLiked] = useState<boolean>(false);
 
-  const [divider1Image, setDivider1Image] = usePersistentState('divider1Image', '/uploaded/organizasyonel-tasarim/degerler-lansmani/el-pankartı-1.png');
-  const [divider2Image, setDivider2Image] = usePersistentState('divider2Image', '/uploaded/organizasyonel-tasarim/degerler-lansmani/el-pankartı-2.png');
-  const [divider3Image, setDivider3Image] = usePersistentState('divider3Image', '/uploaded/organizasyonel-tasarim/el-pankartı-3.png');
-  const [divider4Image, setDivider4Image] = usePersistentState('divider4Image', '/uploaded/organizasyonel-tasarim/el-pankartı-4.png');
+  const [divider1Image, setDivider1Image] = usePersistentState('divider1Image');
+  const [divider2Image, setDivider2Image] = usePersistentState('divider2Image');
+  const [divider3Image, setDivider3Image] = usePersistentState('divider3Image');
+  const [divider4Image, setDivider4Image] = usePersistentState('divider4Image');
   const [divider5Image, setDivider5Image] = usePersistentState('divider5Image');
   const [divider6Image, setDivider6Image] = usePersistentState('divider6Image');
   const [divider7Image, setDivider7Image] = usePersistentState('divider7Image');
@@ -4158,7 +4158,23 @@ function CategoryViewInner({ categoryId, onBack }: CategoryViewProps) {
 
   if (categoryId === 'social-media') {
     return (
-      <div className="w-full">
+      <div className="relative min-h-screen bg-[#070707] text-white overflow-hidden animate-fadeIn">
+        <div className="absolute inset-0 z-0 bg-[radial-gradient(rgba(255,255,255,0.015)_1px,transparent_1px)] bg-[size:32px_32px] pointer-events-none" />
+        <div className="paper-grain opacity-85" />
+
+        <div className="max-w-6xl mx-auto pt-28 sm:pt-32 pb-40 px-6 sm:px-12 relative z-10 text-left">
+          <div className="mb-12">
+            <motion.button
+              onClick={onBack}
+              whileHover={{ scale: 1.05, x: -3 }}
+              whileTap={{ scale: 0.98 }}
+              className="inline-flex items-center gap-2.5 group cursor-pointer bg-[#FF6B00] text-white hover:bg-[#e66000] transition-all duration-300 py-2.5 px-5 rounded-xl shadow-[0_4px_20px_rgba(255,107,0,0.25)] font-bold font-mono text-[10px] tracking-widest uppercase"
+            >
+              <ArrowLeft className="w-4 h-4 transition-transform group-hover:-translate-x-0.5 text-white" />
+              <span>← Çalışmalarıma Dön</span>
+            </motion.button>
+          </div>
+
         {/* Heading styled with creative bold straight font for titles, and elegant small descriptions */}
         <div className="mb-16 border-b border-white/5 pb-12">
           <span className="font-mono text-[10px] tracking-[0.3em] uppercase font-bold block mb-4 animate-fade-in" style={{ color: catHeading.color }}>
@@ -4254,8 +4270,6 @@ function CategoryViewInner({ categoryId, onBack }: CategoryViewProps) {
                 <span className="font-sans font-black">// Gastronomi Topluluğu //</span>
               </div>
 
-              {/* Gastronomi Carousel */}
-              {renderCarousel('gastronomi', gastronomiCarouselIdx, setGastronomiCarouselIdx)}
             </motion.div>
           )}
 
@@ -4289,8 +4303,6 @@ function CategoryViewInner({ categoryId, onBack }: CategoryViewProps) {
                 )}
               </div>
 
-              {/* Z Burada Carousel */}
-              {renderCarousel('zburada', zburadaCarouselIdx, setZburadaCarouselIdx)}
             </motion.div>
           )}
 
@@ -4472,6 +4484,7 @@ function CategoryViewInner({ categoryId, onBack }: CategoryViewProps) {
 
             </motion.div>
           )}
+        </div>
         </div>
       </div>
     );
@@ -6784,40 +6797,65 @@ function CategoryViewInner({ categoryId, onBack }: CategoryViewProps) {
                       {renderGeometricPattern(7, divider7Image, setDivider7Image, divider7FileInputRef)}
                     </div>
 
-                    <motion.div
-                      initial={{ opacity: 0, y: 40, filter: 'blur(8px)' }}
-                      whileInView={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
-                      viewport={{ once: true, margin: "-120px" }}
-                      transition={{ duration: 0.9, ease: [0.16, 1, 0.3, 1] }}
-                      className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-stretch"
-                    >
-                      <div className="lg:col-span-3 flex flex-col justify-between py-2">
-                        <div className="flex items-center gap-3 mb-4 select-none">
-                          <span className="font-serif italic font-extralight text-6xl text-[#38B6E3]/25 leading-none">06</span>
-                          <h3 className="font-serif text-2xl text-white font-light tracking-tight">İnktaktif Çerçeve</h3>
-                        </div>
+              {/* Section 6: Yönlendirme ve Çerçeve Tasarımı */}
+              <motion.div 
+                initial={{ opacity: 0, y: 40, filter: 'blur(8px)' }}
+                whileInView={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
+                viewport={{ once: true, margin: "-120px" }}
+                transition={{ duration: 0.9, ease: [0.16, 1, 0.3, 1] }}
+                className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-stretch"
+              >
+                {/* Left Column: Title and Frame design text */}
+                <div className="lg:col-span-3 flex flex-col justify-between py-2">
+                  <div>
+                    <div className="flex items-center gap-3 mb-4 select-none">
+                      <span className="font-serif italic font-extralight text-6xl text-[#38B6E3]/25 leading-none">06</span>
+                      <div className="flex flex-col">
+                        <span className="font-mono text-[8px] text-[#38B6E3] tracking-[0.3em] font-bold uppercase mb-0.5">// YÖNLENDİRME KULESİ</span>
+                        <h3 className="font-serif text-2xl text-white font-light tracking-tight">
+                          İnteraktif <span className="text-[#38B6E3] italic font-normal">Çerçeve</span>
+                        </h3>
                       </div>
+                    </div>
+                  </div>
 
-                      <div className="lg:col-span-6 flex flex-col justify-center gap-2 items-center">
-                        <ImageUploadPlaceholder
-                          image={directionFrameImage}
-                          onUpload={setDirectionFrameImage}
-                          fileInputRef={directionFrameFileInputRef}
-                          title="İnteraktif Çerçeve"
-                          aspect="aspect-[16/10]"
-                          objectFit="contain"
-                          isLocked={isLocked}
-                        />
-                      </div>
+                  <div className="border-t border-white/5 pt-6 mt-4">
+                    <h4 className="font-mono text-[8px] tracking-widest text-[#A31D44] uppercase mb-2">// 02 / ÇERÇEVE YAZISI</h4>
+                    <p className="font-sans text-xs text-white/45 leading-relaxed font-light">
+                      Lansman fotoğraf alanlarında kullanılmak üzere tasarladığım çerçeve kurgusudur. Katılımcıların marka değerleriyle en şık şekilde fotoğraflanmasını ve etkileşim kurmasını sağlayan dinamik kurumsal çizgiler barındırır.
+                    </p>
+                  </div>
+                </div>
 
-                      <div className="lg:col-span-3 flex flex-col justify-center py-2 h-full">
-                        <div className="border border-white/5 bg-[#07070a]/40 backdrop-blur-md rounded-2xl p-5 h-full flex flex-col justify-center">
-                          <p className="font-sans text-xs text-white/45 leading-relaxed font-light">
-                            Lansman fotoğraf alanlarında kullanılmak üzere tasarladığım çerçeve kurgusudur.
-                          </p>
-                        </div>
-                      </div>
-                    </motion.div>
+                {/* Middle Column: The big image placeholder */}
+                <div className="lg:col-span-6 flex flex-col justify-center gap-2 items-center">
+                  <div className="w-full">
+                    <div className="flex items-center gap-1.5 mb-2 justify-center">
+                      <span className="w-1.5 h-1.5 rounded-full bg-[#00F0FF] animate-pulse" />
+                      <span className="font-mono text-[7.5px] text-white/50 tracking-widest uppercase">// GÖRSEL ÖNİZLEME PANOSU</span>
+                    </div>
+                    <ImageUploadPlaceholder 
+                      image={directionFrameImage}
+                      onUpload={setDirectionFrameImage}
+                      fileInputRef={directionFrameFileInputRef}
+                      title="İnteraktif Çerçeve / Yönlendirme Kulesi"
+                      aspect="aspect-[16/10]" // Horizontal backdrop style aspect ratio
+                      objectFit="contain"
+                      isLocked={isLocked}
+                    />
+                  </div>
+                </div>
+
+                {/* Right Column: Direction info text */}
+                <div className="lg:col-span-3 flex flex-col justify-center py-2 h-full">
+                  <div className="border border-white/5 bg-[#07070a]/40 backdrop-blur-md rounded-2xl p-5 h-full flex flex-col justify-center">
+                    <h4 className="font-mono text-[8px] tracking-widest text-[#38B6E3] uppercase mb-2">// 01 / YÖNLENDİRME BİLGİ YAZISI</h4>
+                    <p className="font-sans text-xs text-white/45 leading-relaxed font-light">
+                      Bu tasarımları basit birer yön tabelası olarak değil, katılımcıyı mekan boyunca kurumsal felsefeyle buluşturan 'mesaj kuleleri' olarak kurguladım. Üzerlerinde yer tarifi yerine kurum değerlerini, vizyon-misyon cümlelerini ve lansman manifestosunu barındıran bu panoların, katılımcıların mekanda hareket ederken bile kurum kültürünün o yaşayan ritmini sürekli okumasını ve hissetmesini sağlamayı amaçladım.
+                    </p>
+                  </div>
+                </div>
+              </motion.div>
 
                     <motion.div
                       initial={{ opacity: 0, y: 30, filter: 'blur(8px)' }}
