@@ -883,15 +883,17 @@ function CategoryViewInner({ categoryId, onBack }: CategoryViewProps) {
   const [backdropImage, setBackdropImage] = usePersistentState('backdropImage', '/uploaded/organizasyonel-tasarim/degerler-lansmani/backdrop.png');
 
   const [aiFactoryCoverImageInternal] = useState('/uploaded/organizasyonel-tasarim/ai-agent/kapak.png');
-  const [aiFactoryImageInternal] = useState('/uploaded/organizasyonel-tasarim/ai-agent/kimlik-sol-gorsel.png');
-  const [aiFactoryThemeImageInternal] = useState('/uploaded/organizasyonel-tasarim/ai-agent/kimlik-sag-gorsel.png');
-  const [aiFactoryBackdropImageInternal] = useState('/uploaded/organizasyonel-tasarim/ai-agent/backdrop-tasarımı.png');
-  const [aiFactoryDirectionImageInternal] = useState('/uploaded/organizasyonel-tasarim/ai-agent/yonlendirme.png');
-  const [aiFactoryFrameImageInternal] = useState('/uploaded/organizasyonel-tasarim/ai-agent/sipsak-foto-deneyimi.png');
-  const [aiFactoryCarouselImageInternal] = useState('/uploaded/organizasyonel-tasarim/ai-agent/instagram-gonderisi-1.jpg');
-  const [aiFactoryStickerImageInternal] = useState('/uploaded/organizasyonel-tasarim/ai-agent/sticker-sets-tasarımı.png');
-  const [aiFactoryBadgeImageInternal] = useState('/uploaded/organizasyonel-tasarim/ai-agent/takım-isimligi-tasarımı.png');
-  const [aiFactoryTrophyImageInternal] = useState('/uploaded/organizasyonel-tasarim/ai-agent/dino-odulu.png');
+  const [aiFactoryThemeImage, setAiFactoryThemeImage] = usePersistentState('aiFactoryThemeImage', '/uploaded/organizasyonel-tasarim/ai-agent/kimlik-sag-gorsel.png');
+  const [aiFactoryBackdropImage, setAiFactoryBackdropImage] = usePersistentState('aiFactoryBackdropImage', '/uploaded/organizasyonel-tasarim/ai-agent/backdrop-tasarımı.png');
+  const [aiFactoryDirectionImage, setAiFactoryDirectionImage] = usePersistentState('aiFactoryDirectionImage', '/uploaded/organizasyonel-tasarim/ai-agent/yonlendirme.png');
+  const [aiFactoryFrameImage, setAiFactoryFrameImage] = usePersistentState('aiFactoryFrameImage', '/uploaded/organizasyonel-tasarim/ai-agent/sipsak-foto-deneyimi.png');
+  const [aiFactoryCarouselImage, setAiFactoryCarouselImage] = usePersistentState('aiFactoryCarouselImage', '/uploaded/organizasyonel-tasarim/ai-agent/instagram-gonderisi-1.jpg');
+  const [aiFactoryInsta2Image, setAiFactoryInsta2Image] = usePersistentState('aiFactoryInsta2Image', '/uploaded/organizasyonel-tasarim/ai-agent/instagram-gonderisi-2.jpg');
+  const [aiFactoryInsta3Image, setAiFactoryInsta3Image] = usePersistentState('aiFactoryInsta3Image', '/uploaded/organizasyonel-tasarim/ai-agent/instagram-gonderisi-3.jpg');
+  const [aiFactoryInsta4Image, setAiFactoryInsta4Image] = usePersistentState('aiFactoryInsta4Image', '/uploaded/organizasyonel-tasarim/ai-agent/instagram-gonderisi-4.jpg');
+  const [aiFactoryStickerImage, setAiFactoryStickerImage] = usePersistentState('aiFactoryStickerImage', '/uploaded/organizasyonel-tasarim/ai-agent/sticker-sets-tasarımı.png');
+  const [aiFactoryBadgeImage, setAiFactoryBadgeImage] = usePersistentState('aiFactoryBadgeImage', '/uploaded/organizasyonel-tasarim/ai-agent/takım-isimligi-tasarımı.png');
+  const [aiFactoryTrophyImage, setAiFactoryTrophyImage] = usePersistentState('aiFactoryTrophyImage', '/uploaded/organizasyonel-tasarim/ai-agent/dino-odulu.png');
 
   const rdThemeFileInputRef = useRef<HTMLInputElement>(null);
   const rdSection1FileInputRef = useRef<HTMLInputElement>(null);
@@ -986,7 +988,9 @@ function CategoryViewInner({ categoryId, onBack }: CategoryViewProps) {
       pages: [
         '/uploaded/dergi/sayi1/sayfa-1.png',
         '/uploaded/dergi/sayi1/sayfa-2.png',
-        '/uploaded/dergi/sayi1/sayfa-3.png'
+        '/uploaded/dergi/sayi1/sayfa-3.png',
+        '/uploaded/dergi/sayi1/sayfa-4.png',
+        '/uploaded/dergi/sayi1/sayfa-5.png'
       ]
     },
     {
@@ -997,7 +1001,9 @@ function CategoryViewInner({ categoryId, onBack }: CategoryViewProps) {
         '/uploaded/dergi/sayi2/sayfa-2.png',
         '/uploaded/dergi/sayi2/sayfa-3.png',
         '/uploaded/dergi/sayi2/sayfa-4.png',
-        '/uploaded/dergi/sayi2/sayfa-5.png'
+        '/uploaded/dergi/sayi2/sayfa-5.png',
+        '/uploaded/dergi/sayi2/sayfa-6.png',
+        '/uploaded/dergi/sayi2/sayfa-7.png'
       ]
     },
     {
@@ -1008,7 +1014,6 @@ function CategoryViewInner({ categoryId, onBack }: CategoryViewProps) {
         '/uploaded/dergi/sayi3/sayfa-2.png',
         '/uploaded/dergi/sayi3/sayfa-3.png',
         '/uploaded/dergi/sayi3/sayfa-4.png',
-        '/uploaded/dergi/sayi5/sayfa-5.png',
         '/uploaded/dergi/sayi3/sayfa-6.png',
         '/uploaded/dergi/sayi3/sayfa-7.png'
       ]
@@ -1054,6 +1059,17 @@ function CategoryViewInner({ categoryId, onBack }: CategoryViewProps) {
   }, []);
 
   const productsWheelTimeRef = useRef(0);
+  const SOCIAL_GRID_DEFAULT_IMAGES: Record<string, string> = (() => {
+    const result: Record<string, string> = {};
+    for (let i = 1; i <= 9; i++) {
+      result[`gastronomi_grid_${i}`] = `/uploaded/sosyal-medya/gastronomi-${i}.png`;
+    }
+    for (let i = 1; i <= 12; i++) {
+      result[`zburada_grid_${i}`] = `/uploaded/sosyal-medya/zburada-${i}.png`;
+    }
+    return result;
+  })();
+
   const [socialMediaData, setSocialMediaData] = useState<{
     images: Record<string, string>;
     captions: Record<string, string>;
@@ -1067,6 +1083,7 @@ function CategoryViewInner({ categoryId, onBack }: CategoryViewProps) {
         return {
           ...parsed,
           images: {
+            ...SOCIAL_GRID_DEFAULT_IMAGES,
             ...cachedImages,
             ...(parsed.images || {})
           },
@@ -1081,7 +1098,7 @@ function CategoryViewInner({ categoryId, onBack }: CategoryViewProps) {
         };
       }
       return {
-        images: cachedImages,
+        images: { ...SOCIAL_GRID_DEFAULT_IMAGES, ...cachedImages },
         captions: {
           ...GASTRONOMI_CAPTIONS,
           ...ZERRA_CAPTIONS
@@ -1092,7 +1109,7 @@ function CategoryViewInner({ categoryId, onBack }: CategoryViewProps) {
       console.error(e);
     }
     return {
-      images: {},
+      images: { ...SOCIAL_GRID_DEFAULT_IMAGES },
       captions: {
         ...GASTRONOMI_CAPTIONS,
         ...ZERRA_CAPTIONS
@@ -1100,6 +1117,32 @@ function CategoryViewInner({ categoryId, onBack }: CategoryViewProps) {
       titles: {}
     };
   });
+
+  const FOTOROMAN_DEFAULT_IMAGES: Record<string, string> = {
+    fotoroman_1_img_0: '/uploaded/fotoroman-projeleri/cobancık/1.png',
+    fotoroman_1_img_1: '/uploaded/fotoroman-projeleri/cobancık/2.png',
+    fotoroman_1_img_2: '/uploaded/fotoroman-projeleri/cobancık/3.png',
+    fotoroman_1_img_3: '/uploaded/fotoroman-projeleri/cobancık/4.png',
+    fotoroman_1_img_4: '/uploaded/fotoroman-projeleri/cobancık/5.png',
+    fotoroman_2_img_0: '/uploaded/fotoroman-projeleri/ekmek-teknesi/1.png',
+    fotoroman_2_img_1: '/uploaded/fotoroman-projeleri/ekmek-teknesi/2.png',
+    fotoroman_2_img_2: '/uploaded/fotoroman-projeleri/ekmek-teknesi/3.png',
+    fotoroman_2_img_3: '/uploaded/fotoroman-projeleri/ekmek-teknesi/4.png',
+    fotoroman_2_img_4: '/uploaded/fotoroman-projeleri/ekmek-teknesi/5.png',
+    fotoroman_3_img_0: '/uploaded/fotoroman-projeleri/herhangi-bir-yer/1.png',
+    fotoroman_3_img_1: '/uploaded/fotoroman-projeleri/herhangi-bir-yer/2.png',
+    fotoroman_3_img_2: '/uploaded/fotoroman-projeleri/herhangi-bir-yer/3.png',
+    fotoroman_3_img_3: '/uploaded/fotoroman-projeleri/herhangi-bir-yer/4.png',
+    fotoroman_3_img_4: '/uploaded/fotoroman-projeleri/herhangi-bir-yer/5.png',
+    fotoroman_4_img_0: '/uploaded/fotoroman-projeleri/herhangi-bir-an/1.png',
+    fotoroman_4_img_1: '/uploaded/fotoroman-projeleri/herhangi-bir-an/2.png',
+    fotoroman_4_img_2: '/uploaded/fotoroman-projeleri/herhangi-bir-an/3.png',
+    fotoroman_4_img_3: '/uploaded/fotoroman-projeleri/herhangi-bir-an/4.png',
+    fotoroman_5_img_0: '/uploaded/fotoroman-projeleri/herhangi-biri/1.png',
+    fotoroman_5_img_1: '/uploaded/fotoroman-projeleri/herhangi-biri/2.png',
+    fotoroman_5_img_2: '/uploaded/fotoroman-projeleri/herhangi-biri/3.png',
+    fotoroman_5_img_3: '/uploaded/fotoroman-projeleri/herhangi-biri/4.png',
+  };
 
   const [fotoromanData, setFotoromanData] = useState<{
     images: Record<string, string>;
@@ -1113,19 +1156,20 @@ function CategoryViewInner({ categoryId, onBack }: CategoryViewProps) {
         return {
           ...parsed,
           images: {
+            ...FOTOROMAN_DEFAULT_IMAGES,
             ...cachedImages,
             ...(parsed.images || {})
           }
         };
       }
       return {
-        images: cachedImages,
+        images: { ...FOTOROMAN_DEFAULT_IMAGES, ...cachedImages },
         activePageIdxs: {}
       };
     } catch (e) {
       console.error(e);
     }
-    return { images: {}, activePageIdxs: {} };
+    return { images: { ...FOTOROMAN_DEFAULT_IMAGES }, activePageIdxs: {} };
   });
 
   useEffect(() => {
@@ -1635,6 +1679,9 @@ function CategoryViewInner({ categoryId, onBack }: CategoryViewProps) {
   const [divider3Image, setDivider3Image] = usePersistentState('divider3Image', '/uploaded/organizasyonel-tasarim/el-pankartı-3.png');
   const [divider4Image, setDivider4Image] = usePersistentState('divider4Image', '/uploaded/organizasyonel-tasarim/el-pankartı-4.png');
   const [divider5Image, setDivider5Image] = usePersistentState('divider5Image');
+  const [divider6Image, setDivider6Image] = usePersistentState('divider6Image');
+  const [divider7Image, setDivider7Image] = usePersistentState('divider7Image');
+  const [divider8Image, setDivider8Image] = usePersistentState('divider8Image');
 
   const aiFactoryFileInputRef = useRef<HTMLInputElement>(null);
   const aiTunnelFileInputRef = useRef<HTMLInputElement>(null);
@@ -1730,6 +1777,18 @@ function CategoryViewInner({ categoryId, onBack }: CategoryViewProps) {
   const divider7FileInputRef = useRef<HTMLInputElement>(null);
   const divider8FileInputRef = useRef<HTMLInputElement>(null);
 
+  const MAGAZINE_DEFAULT_IMAGES: Record<string, string> = (() => {
+    const totalPagesByIssue: Record<number, number> = { 1: 5, 2: 7, 3: 6, 4: 3, 5: 5 };
+    const result: Record<string, string> = {};
+    Object.entries(totalPagesByIssue).forEach(([issueIdStr, totalPages]) => {
+      const issueId = Number(issueIdStr);
+      for (let pageIdx = 0; pageIdx < totalPages; pageIdx++) {
+        result[`mag_issue_${issueId}_page_${pageIdx}`] = `/uploaded/dergi/sayi${issueId}/sayfa-${pageIdx + 1}.png`;
+      }
+    });
+    return result;
+  })();
+
   const [magazineData, setMagazineData] = useState<{
     images: Record<string, string>;
     activeViewIdxs: Record<string, number>;
@@ -1745,13 +1804,14 @@ function CategoryViewInner({ categoryId, onBack }: CategoryViewProps) {
         return {
           ...parsed,
           images: {
+            ...MAGAZINE_DEFAULT_IMAGES,
             ...cachedImages,
             ...(parsed.images || {})
           }
         };
       }
       return {
-        images: cachedImages,
+        images: { ...MAGAZINE_DEFAULT_IMAGES, ...cachedImages },
         activeViewIdxs: {
           "mag_issue_1": 0,
           "mag_issue_2": 0,
@@ -1767,7 +1827,7 @@ function CategoryViewInner({ categoryId, onBack }: CategoryViewProps) {
       console.error(e);
     }
     return {
-      images: {},
+      images: { ...MAGAZINE_DEFAULT_IMAGES },
       activeViewIdxs: {
         "mag_issue_1": 0,
         "mag_issue_2": 0,
@@ -2862,6 +2922,616 @@ function CategoryViewInner({ categoryId, onBack }: CategoryViewProps) {
     </div>
   );
 
+  const renderFotoromanDefaultSVG = (fotoromanIdx: number, pageIdx: number) => {
+    if (fotoromanIdx === 1) {
+      if (pageIdx === 0) {
+        return (
+          <div className="w-full h-full bg-[#050508] border border-[#10B981]/10 flex flex-col justify-between p-6 select-none font-sans text-white/90 text-left">
+            <div className="flex justify-between items-center font-mono text-[7px] text-[#10B981]">
+              <span>[KAPAK] // BÖLÜM 01</span>
+              <span>DEĞER: GÜVEN</span>
+            </div>
+            <div className="my-auto flex flex-col items-center gap-4 text-center">
+              <span className="font-mono text-[8px] tracking-[0.3em] text-[#10B981]/40 uppercase font-black">// AHİ EVRAN</span>
+              <h2 className="font-serif italic text-2xl tracking-tight text-white/90">İnançla Yükselen Güven</h2>
+              <p className="font-sans text-[8px] max-w-[150px] text-white/40 leading-relaxed font-light">"Söylediğimizi yapar, yaptığımızı sahipleniriz."</p>
+              <div className="w-8 h-[1px] bg-[#10B981]/20" />
+            </div>
+            <div className="flex justify-between items-end font-mono text-[6px] text-white/20">
+              <span>EDİTÖRYAL: GÜVEN</span>
+              <span>SAYFA: A5_GRID</span>
+            </div>
+          </div>
+        );
+      }
+      if (pageIdx === 1) {
+        return (
+          <div className="w-full h-full bg-[#050508] border border-[#10B981]/10 flex flex-col justify-between p-5 select-none font-sans text-white/90 text-left">
+            <div className="flex justify-between items-center font-mono text-[6px] text-[#10B981]/40">
+              <span>SAYFA 01 // DEĞER TEMELİ</span>
+              <span>LİDER: AHİ EVRAN</span>
+            </div>
+            <div className="flex-1 my-4 grid grid-cols-2 gap-3 items-center">
+              <div className="h-full border border-dashed border-white/5 bg-white/[0.01] flex items-center justify-center relative p-3">
+                <div className="absolute inset-2 border border-white/[0.02]" />
+                <span className="font-mono text-[6px] text-white/25">[GÜVEN 1.A]</span>
+              </div>
+              <div className="flex flex-col gap-2">
+                <span className="font-serif italic text-[11px] text-white">Sahiplenme</span>
+                <p className="font-sans text-[6px] text-white/40 leading-relaxed font-light">
+                  Ahi Evran teşkilatının dürüstlük ve güven ilkesi, işimizdeki en sarsılmaz temeli çizer.
+                </p>
+                <div className="h-[2px] w-6 bg-[#10B981]/30" />
+              </div>
+            </div>
+            <div className="flex justify-between items-center font-mono text-[5px] text-white/20">
+              <span>GÜVEN DEĞERİ</span>
+              <span>A5_PORTRAIT_01</span>
+            </div>
+          </div>
+        );
+      }
+      if (pageIdx === 2) {
+        return (
+          <div className="w-full h-full bg-[#050508] border border-[#10B981]/10 flex flex-col justify-between p-6 select-none font-sans text-white/90 text-left">
+            <div className="flex justify-between items-center font-mono text-[6px] text-[#10B981]/40">
+              <span>SAYFA 02 // MANİFESTO</span>
+              <span>ODAK: İNANÇ</span>
+            </div>
+            <div className="my-auto text-left flex flex-col gap-3">
+              <span className="font-mono text-[14px] text-[#10B981]/30 font-bold">"</span>
+              <p className="font-serif italic text-sm text-white/80 leading-relaxed font-light">
+                Güven bir sözleşme değil, dürüst bir duruştur. Söylediğini yapanlar, yarını inançla inşa ederler.
+              </p>
+              <span className="font-mono text-[6px] text-white/30 tracking-widest uppercase mt-1">// KURUMSAL KÜLTÜR</span>
+            </div>
+            <div className="flex justify-between items-center font-mono text-[5px] text-white/20">
+              <span>GÜVEN DEĞERİ</span>
+              <span>A5_PORTRAIT_02</span>
+            </div>
+          </div>
+        );
+      }
+      if (pageIdx === 3) {
+        return (
+          <div className="w-full h-full bg-[#050508] border border-[#10B981]/10 flex flex-col justify-between p-5 select-none font-sans text-white/90 text-left">
+            <div className="flex justify-between items-center font-mono text-[6px] text-[#10B981]/40">
+              <span>SAYFA 03 // DETAY</span>
+              <span>GÜVEN UNSURU</span>
+            </div>
+            <div className="flex-1 my-4 flex flex-col justify-center items-center gap-3">
+              <div className="w-20 h-20 rounded-full border border-[#10B981]/20 flex items-center justify-center relative bg-[#10B981]/[0.01]">
+                <div className="absolute inset-2 rounded-full border border-dashed border-white/5" />
+                <span className="font-mono text-[6px] text-[#10B981]/60">DÜRÜSTLÜK</span>
+              </div>
+              <p className="font-sans text-[6px] text-white/40 leading-relaxed font-light text-center max-w-[140px]">
+                "Söylediğimizi yapar, yaptığımızı sahipleniriz."
+              </p>
+            </div>
+            <div className="flex justify-between items-center font-mono text-[5px] text-white/20">
+              <span>GÜVEN DEĞERİ</span>
+              <span>A5_PORTRAIT_03</span>
+            </div>
+          </div>
+        );
+      }
+      return (
+        <div className="w-full h-full bg-[#050508] border border-[#10B981]/10 flex flex-col justify-between p-5 select-none font-sans text-white/90 text-left">
+          <div className="flex justify-between items-center font-mono text-[6px] text-[#10B981]/40">
+            <span>SAYFA 04 // ÇIKIŞ</span>
+            <span>GÜVEN: TAMAMLANDI</span>
+          </div>
+          <div className="my-auto flex flex-col items-center gap-3 text-center">
+            <div className="w-12 h-[1px] bg-[#10B981]/45" />
+            <span className="font-mono text-[8px] text-white/30 tracking-wider">MİSYON</span>
+            <p className="font-serif italic text-[11px] text-white/70 max-w-[120px] leading-relaxed">
+              Her adımda güven, her kararda dürüstlük ve aidiyet.
+            </p>
+          </div>
+          <div className="flex justify-between items-center font-mono text-[5px] text-white/20">
+            <span>GÜVEN DEĞERİ</span>
+            <span>A5_PORTRAIT_04</span>
+          </div>
+        </div>
+      );
+    }
+
+    if (fotoromanIdx === 2) {
+      if (pageIdx === 0) {
+        return (
+          <div className="w-full h-full bg-[#040906] border border-[#10B981]/15 flex flex-col justify-between p-6 select-none font-sans text-emerald-100 text-left">
+            <div className="flex justify-between items-center font-mono text-[7px] text-[#10B981]">
+              <span>[KAPAK] // BÖLÜM 02</span>
+              <span>DEĞER: SÜREKLİ GELİŞİM</span>
+            </div>
+            <div className="my-auto flex flex-col items-center gap-4 text-center">
+              <span className="font-mono text-[8px] tracking-[0.3em] text-[#10B981]/40 uppercase font-black">// ALİ KUŞÇU</span>
+              <h2 className="font-serif italic text-2xl tracking-tight text-white/90">Yarının Potansiyeli</h2>
+              <p className="font-sans text-[8px] max-w-[150px] text-emerald-100/40 leading-relaxed font-light">"Bugünün başarısını yarının potansiyeline dönüştürürüz."</p>
+              <div className="w-8 h-[1px] bg-emerald-500/20" />
+            </div>
+            <div className="flex justify-between items-end font-mono text-[6px] text-emerald-100/20">
+              <span>EDİTÖRYAL: GELİŞİM</span>
+              <span>GÖK ATLASI</span>
+            </div>
+          </div>
+        );
+      }
+      if (pageIdx === 1) {
+        return (
+          <div className="w-full h-full bg-[#040906] border border-[#10B981]/15 flex flex-col justify-between p-5 select-none font-sans text-emerald-100 text-left">
+            <div className="flex justify-between items-center font-mono text-[6px] text-[#10B981]/40">
+              <span>SAYFA 01 // UFUK</span>
+              <span>LİDER: ALİ KUŞÇU</span>
+            </div>
+            <div className="flex-1 my-4 flex flex-col justify-center gap-2">
+              <div className="border border-emerald-500/10 bg-emerald-500/[0.01] rounded-lg p-2.5 flex items-center justify-between">
+                <span className="font-mono text-[7px] text-emerald-400/80">Kozmik Ufuk</span>
+                <span className="font-mono text-[6px] text-white/30">#ALİ_KUŞÇU</span>
+              </div>
+              <p className="font-sans text-[7px] text-emerald-100/50 leading-relaxed font-light">
+                Gökyüzünü ve yıldızları inceleyen meraklı gözler, sürekli öğrenmenin ve değişimin en canlı örneğidir.
+              </p>
+            </div>
+            <div className="flex justify-between items-center font-mono text-[5px] text-emerald-100/20">
+              <span>SÜREKLİ GELİŞİM</span>
+              <span>A5_PORTRAIT_01</span>
+            </div>
+          </div>
+        );
+      }
+      if (pageIdx === 2) {
+        return (
+          <div className="w-full h-full bg-[#040906] border border-[#10B981]/15 flex flex-col justify-between p-6 select-none font-sans text-emerald-100 text-left">
+            <div className="flex justify-between items-center font-mono text-[6px] text-[#10B981]/40">
+              <span>SAYFA 02 // MERAK</span>
+              <span>ODAK: BİLGİ</span>
+            </div>
+            <div className="my-auto text-left flex flex-col gap-2.5">
+              <span className="font-serif italic text-xs text-[#10B981] font-semibold">"Sınırları aşmak."</span>
+              <p className="font-serif italic text-[11px] text-emerald-100/70 leading-relaxed font-light">
+                Bugün ulaştığımız başarı, yarının daha büyük keşifleri için sadece bir basamaktır. Merakımız bizi geleceğe taşır.
+              </p>
+            </div>
+            <div className="flex justify-between items-center font-mono text-[5px] text-emerald-100/20">
+              <span>SÜREKLİ GELİŞİM</span>
+              <span>A5_PORTRAIT_02</span>
+            </div>
+          </div>
+        );
+      }
+      if (pageIdx === 3) {
+        return (
+          <div className="w-full h-full bg-[#040906] border border-[#10B981]/15 flex flex-col justify-between p-5 select-none font-sans text-emerald-100 text-left">
+            <div className="flex justify-between items-center font-mono text-[6px] text-[#10B981]/40">
+              <span>SAYFA 03 // KEŞİF</span>
+              <span>SÜREÇ: DİNAMİK</span>
+            </div>
+            <div className="flex-1 my-3 grid grid-cols-3 gap-1.5 items-center">
+              <div className="h-full border border-[#10B981]/10 bg-[#10B981]/[0.02] flex items-center justify-center">
+                <span className="font-mono text-[5px] text-[#10B981]/40">ÖĞREN</span>
+              </div>
+              <div className="h-full border border-[#10B981]/10 bg-[#10B981]/[0.02] flex items-center justify-center">
+                <span className="font-mono text-[5px] text-[#10B981]/40">UYGULA</span>
+              </div>
+              <div className="h-full border border-[#10B981]/10 bg-[#10B981]/[0.02] flex items-center justify-center">
+                <span className="font-mono text-[5px] text-[#10B981]/40">GELİŞ</span>
+              </div>
+            </div>
+            <div className="flex justify-between items-center font-mono text-[5px] text-emerald-100/20">
+              <span>SÜREKLİ GELİŞİM</span>
+              <span>A5_PORTRAIT_03</span>
+            </div>
+          </div>
+        );
+      }
+      return (
+        <div className="w-full h-full bg-[#040906] border border-[#10B981]/15 flex flex-col justify-between p-5 select-none font-sans text-emerald-100 text-left">
+          <div className="flex justify-between items-center font-mono text-[6px] text-[#10B981]/40">
+            <span>SAYFA 04 // ÇIKIŞ</span>
+            <span>UFKUN ÖTESİ</span>
+          </div>
+          <div className="my-auto flex flex-col items-center gap-2 text-center">
+            <span className="font-mono text-[16px] text-emerald-500 animate-pulse">✿</span>
+            <p className="font-serif italic text-[11px] text-emerald-100/60 leading-relaxed">
+              Öğrenme atlası açık, gelişim yolculuğu sürekli.
+            </p>
+          </div>
+          <div className="flex justify-between items-center font-mono text-[5px] text-emerald-100/20">
+            <span>SÜREKLİ GELİŞİM</span>
+            <span>A5_PORTRAIT_04</span>
+          </div>
+        </div>
+      );
+    }
+
+    if (fotoromanIdx === 3) {
+      if (pageIdx === 0) {
+        return (
+          <div className="w-full h-full bg-[#05050b] border border-emerald-500/10 flex flex-col justify-between p-6 select-none font-sans text-white/90 text-left">
+            <div className="flex justify-between items-center font-mono text-[7px] text-emerald-400">
+              <span>[KAPAK] // BÖLÜM 03</span>
+              <span>DEĞER: MÜŞTERİ ODAKLILIK</span>
+            </div>
+            <div className="my-auto flex flex-col items-center gap-4 text-center">
+              <span className="font-mono text-[8px] tracking-[0.3em] text-emerald-500/40 uppercase font-black">// YUSUF HAS HACİB</span>
+              <h2 className="font-serif italic text-2xl tracking-tight text-white/90">Geleceğin Öngörüsü</h2>
+              <p className="font-sans text-[8px] max-w-[150px] text-white/40 leading-relaxed font-light">"Müşterilerimizin beklentilerini öngörürüz."</p>
+              <div className="w-8 h-[1px] bg-emerald-500/30" />
+            </div>
+            <div className="flex justify-between items-end font-mono text-[6px] text-white/20">
+              <span>EDİTÖRYAL: ODAK</span>
+              <span>KUTADGU BİLİG</span>
+            </div>
+          </div>
+        );
+      }
+      if (pageIdx === 1) {
+        return (
+          <div className="w-full h-full bg-[#05050b] border border-emerald-500/10 flex flex-col justify-between p-5 select-none font-sans text-white/90 text-left">
+            <div className="flex justify-between items-center font-mono text-[6px] text-emerald-400/40">
+              <span>SAYFA 01 // EMPATİ</span>
+              <span>LİDER: YUSUF HAS HACİB</span>
+            </div>
+            <div className="flex-1 my-4 flex flex-col justify-center items-center gap-3">
+              <div className="w-20 h-12 bg-emerald-500/5 border border-dashed border-emerald-500/20 flex items-center justify-center relative">
+                <span className="font-mono text-[5px] text-emerald-400/60">// DENEYİM ODAĞI</span>
+              </div>
+              <p className="font-sans text-[6px] text-white/40 leading-relaxed font-light text-center">
+                Müşteri beklentilerini bir bilgelikle okuyup, onlara henüz dile getirmedikleri çözümleri sunarız.
+              </p>
+            </div>
+            <div className="flex justify-between items-center font-mono text-[5px] text-white/20">
+              <span>MÜŞTERİ ODAKLILIK</span>
+              <span>A5_PORTRAIT_01</span>
+            </div>
+          </div>
+        );
+      }
+      if (pageIdx === 2) {
+        return (
+          <div className="w-full h-full bg-[#05050b] border border-emerald-500/10 flex flex-col justify-between p-6 select-none font-sans text-white/90 text-left">
+            <div className="flex justify-between items-center font-mono text-[6px] text-emerald-400/40">
+              <span>SAYFA 02 // HİZMET</span>
+              <span>ODAK: DENEYİM</span>
+            </div>
+            <div className="my-auto text-left flex flex-col gap-2">
+              <span className="font-mono text-[8px] text-emerald-400 font-bold">// BİLGELİK</span>
+              <p className="font-serif italic text-xs text-white/80 leading-relaxed font-light">
+                Kutadgu Bilig'in insan odaklı felsefesini modern iş dünyasının deneyim tasarımıyla harmanlayarak değer üretiriz.
+              </p>
+            </div>
+            <div className="flex justify-between items-center font-mono text-[5px] text-white/20">
+              <span>MÜŞTERİ ODAKLILIK</span>
+              <span>A5_PORTRAIT_02</span>
+            </div>
+          </div>
+        );
+      }
+      if (pageIdx === 3) {
+        return (
+          <div className="w-full h-full bg-[#05050b] border border-emerald-500/10 flex flex-col justify-between p-5 select-none font-sans text-white/90 text-left">
+            <div className="flex justify-between items-center font-mono text-[6px] text-emerald-400/40">
+              <span>SAYFA 03 // ETKİLEŞİM</span>
+              <span>ÇÖZÜM: REAKSİYON</span>
+            </div>
+            <div className="flex-1 my-3 grid grid-cols-2 gap-2">
+              <div className="h-full border border-dashed border-emerald-500/10 flex items-center justify-center">
+                <span className="font-mono text-[5px] text-emerald-400/30">[BEKLENTİ]</span>
+              </div>
+              <div className="h-full border border-dashed border-emerald-500/10 flex items-center justify-center">
+                <span className="font-mono text-[5px] text-emerald-400/30">[MEMNUNİYET]</span>
+              </div>
+            </div>
+            <div className="flex justify-between items-center font-mono text-[5px] text-white/20">
+              <span>MÜŞTERİ ODAKLILIK</span>
+              <span>A5_PORTRAIT_03</span>
+            </div>
+          </div>
+        );
+      }
+      return (
+        <div className="w-full h-full bg-[#05050b] border border-emerald-500/10 flex flex-col justify-between p-5 select-none font-sans text-white/90 text-left">
+          <div className="flex justify-between items-center font-mono text-[6px] text-[#10B981]/40">
+            <span>SAYFA 04 // SÜREKLİLİK</span>
+            <span>ÖNGÖRÜ: AKTİF</span>
+          </div>
+          <div className="my-auto flex flex-col items-center gap-2 text-center">
+            <span className="font-mono text-[8px] text-emerald-400 tracking-widest animate-pulse">// MÜŞTERİ MUTLULUĞU //</span>
+            <p className="font-serif italic text-[11px] text-white/60">
+              İhtiyaçlar anlaşıldı, kusursuz deneyim kaydedildi.
+            </p>
+          </div>
+          <div className="flex justify-between items-center font-mono text-[5px] text-white/20">
+            <span>MÜŞTERİ ODAKLILIK</span>
+            <span>A5_PORTRAIT_04</span>
+          </div>
+        </div>
+      );
+    }
+
+    if (fotoromanIdx === 4) {
+      if (pageIdx === 0) {
+        return (
+          <div className="w-full h-full bg-[#090807] border border-amber-800/15 flex flex-col justify-between p-6 select-none font-sans text-amber-100/90 text-left">
+            <div className="flex justify-between items-center font-mono text-[7px] text-amber-600">
+              <span>[KAPAK] // BÖLÜM 04</span>
+              <span>DEĞER: ÇEVİK TAKIM RUHU</span>
+            </div>
+            <div className="my-auto flex flex-col items-center gap-4 text-center">
+              <span className="font-mono text-[8px] tracking-[0.3em] text-amber-600/40 uppercase font-black">// BARBAROS HAYREDDİN</span>
+              <h2 className="font-serif italic text-2xl tracking-tight text-white/90">Ortak Hedefe Tek Takım</h2>
+              <p className="font-sans text-[8px] max-w-[150px] text-amber-100/40 leading-relaxed font-light">"Birlikte düşünür, birlikte karar alırız."</p>
+              <div className="w-8 h-[1px] bg-amber-600/20" />
+            </div>
+            <div className="flex justify-between items-end font-mono text-[6px] text-amber-100/20">
+              <span>EDİTÖRYAL: ÇEVİKLİK</span>
+              <span>FORSA HARİTASI</span>
+            </div>
+          </div>
+        );
+      }
+      if (pageIdx === 1) {
+        return (
+          <div className="w-full h-full bg-[#090807] border border-amber-800/15 flex flex-col justify-between p-5 select-none font-sans text-amber-100/90 text-left">
+            <div className="flex justify-between items-center font-mono text-[6px] text-amber-600/40">
+              <span>SAYFA 01 // SINERJİ</span>
+              <span>LİDER: BARBAROS</span>
+            </div>
+            <div className="flex-1 my-4 flex flex-col justify-center items-center gap-3">
+              <div className="w-20 h-20 rounded-sm border border-dashed border-amber-600/20 bg-amber-600/[0.01] flex items-center justify-center">
+                <span className="font-mono text-[5px] text-amber-600/50">[BİRLİK_ZAMAN]</span>
+              </div>
+              <p className="font-sans text-[6.5px] text-amber-100/50 leading-relaxed text-center font-light">
+                Her fikrin dinlendiği ve her elin küreğe aynı inançla asıldığı bir takımda aşılmayacak fırtına yoktur.
+              </p>
+            </div>
+            <div className="flex justify-between items-center font-mono text-[5px] text-amber-100/20">
+              <span>ÇEVİK TAKIM RUHU</span>
+              <span>A5_PORTRAIT_01</span>
+            </div>
+          </div>
+        );
+      }
+      if (pageIdx === 2) {
+        return (
+          <div className="w-full h-full bg-[#090807] border border-amber-800/15 flex flex-col justify-between p-6 select-none font-sans text-amber-100/90 text-left">
+            <div className="flex justify-between items-center font-mono text-[6px] text-amber-600/40">
+              <span>SAYFA 02 // DAYANIŞMA</span>
+              <span>ODAK: TAKIM</span>
+            </div>
+            <div className="my-auto text-left flex flex-col gap-2">
+              <span className="font-serif italic text-xs text-amber-400 font-semibold">Birlikte Karar</span>
+              <p className="font-serif italic text-[11px] text-amber-100/70 leading-relaxed font-light">
+                Tek başına hızlı gidebilirsin ama ancak birlikteyken uzağa ve derin sulara yelken açabilirsin. Biz bir takımız.
+              </p>
+            </div>
+            <div className="flex justify-between items-center font-mono text-[5px] text-amber-100/20">
+              <span>ÇEVİK TAKIM RUHU</span>
+              <span>A5_PORTRAIT_02</span>
+            </div>
+          </div>
+        );
+      }
+      if (pageIdx === 3) {
+        return (
+          <div className="w-full h-full bg-[#090807] border border-amber-800/15 flex flex-col justify-between p-5 select-none font-sans text-amber-100/90 text-left">
+            <div className="flex justify-between items-center font-mono text-[6px] text-amber-600/40">
+              <span>SAYFA 03 // TAKTİK</span>
+              <span>SÜRÜM: SÜPER-ÇEVİK</span>
+            </div>
+            <div className="flex-1 my-3 flex flex-col gap-1 justify-center">
+              <div className="h-6 border border-dashed border-amber-600/10 flex items-center justify-center font-mono text-[5px] text-amber-100/30">DÜŞÜN // PLANLA</div>
+              <div className="h-6 border border-dashed border-amber-600/10 flex items-center justify-center font-mono text-[5px] text-amber-100/30">KARAR AL // UYGULA</div>
+            </div>
+            <div className="flex justify-between items-center font-mono text-[5px] text-amber-100/20">
+              <span>ÇEVİK TAKIM RUHU</span>
+              <span>A5_PORTRAIT_03</span>
+            </div>
+          </div>
+        );
+      }
+      return (
+        <div className="w-full h-full bg-[#090807] border border-amber-800/15 flex flex-col justify-between p-5 select-none font-sans text-amber-100/90 text-left">
+          <div className="flex justify-between items-center font-mono text-[6px] text-amber-600/40">
+            <span>SAYFA 04 // ÇIKIŞ</span>
+            <span>UÇTAN_UCA_BİRLİK</span>
+          </div>
+          <div className="my-auto flex flex-col items-center gap-2.5 text-center">
+            <span className="font-mono text-[6px] text-amber-500 font-bold uppercase tracking-[0.2em]">// RÜZGAR ARKADA //</span>
+            <p className="font-serif italic text-[11px] text-amber-100/60">
+              Takım ruhu pekiştirildi, yelkenler dolduruldu.
+            </p>
+          </div>
+          <div className="flex justify-between items-center font-mono text-[5px] text-amber-100/20">
+            <span>ÇEVİK TAKIM RUHU</span>
+            <span>A5_PORTRAIT_04</span>
+          </div>
+        </div>
+      );
+    }
+
+    if (pageIdx === 0) {
+      return (
+        <div className="w-full h-full bg-[#08080a] border border-[#10B981]/10 flex flex-col justify-between p-6 select-none font-sans text-white/90 text-left">
+          <div className="flex justify-between items-center font-mono text-[7px] text-[#10B981]">
+            <span>[KAPAK] // BÖLÜM 05</span>
+            <span>DEĞER: YENİLİKÇİLİK</span>
+          </div>
+          <div className="my-auto flex flex-col items-center gap-4 text-center">
+            <span className="font-mono text-[8px] tracking-[0.3em] text-[#10B981]/40 uppercase font-black">// EL-CEZERİ</span>
+            <h2 className="font-serif italic text-2xl tracking-tight text-white/90">Geleceğin İmzası</h2>
+            <p className="font-sans text-[8px] max-w-[150px] text-white/40 leading-relaxed font-light">"Yenilikçi çözümlerimizle kalıcı avantajlar oluştururuz."</p>
+            <div className="w-8 h-[1px] bg-[#10B981]/25" />
+          </div>
+          <div className="flex justify-between items-end font-mono text-[6px] text-white/20">
+            <span>EDİTÖRYAL: İNOVASYON</span>
+            <span>SİBER-MEKANİK</span>
+          </div>
+        </div>
+      );
+    }
+    if (pageIdx === 1) {
+      return (
+        <div className="w-full h-full bg-[#08080a] border border-[#10B981]/10 flex flex-col justify-between p-5 select-none font-sans text-white/90 text-left">
+          <div className="flex justify-between items-center font-mono text-[6px] text-[#10B981]/40">
+            <span>SAYFA 01 // İNOVASYON</span>
+            <span>LİDER: EL-CEZERİ</span>
+          </div>
+          <div className="flex-1 my-4 flex flex-col justify-center gap-3">
+            <div className="h-16 border border-dashed border-[#10B981]/20 relative flex items-center justify-center bg-[#10B981]/[0.01]">
+              <div className="absolute inset-x-0 top-1/2 h-[1px] border-b border-white/5" />
+              <div className="absolute inset-y-0 left-1/2 w-[1px] border-r border-white/5" />
+              <span className="font-mono text-[5px] text-white/20 z-10">[KİNETİK SİSTEM]</span>
+            </div>
+            <p className="font-sans text-[6px] text-white/45 leading-relaxed">
+              Mekanik zekanın ve otomasyonun ilk kaşifi olan El-Cezeri gibi, biz de yazılımda yenilikçi çözümlerle fark yaratırız.
+            </p>
+          </div>
+          <div className="flex justify-between items-center font-mono text-[5px] text-white/20">
+            <span>YENİLİKÇİLİK</span>
+            <span>A5_PORTRAIT_01</span>
+          </div>
+        </div>
+      );
+    }
+    if (pageIdx === 2) {
+      return (
+        <div className="w-full h-full bg-[#08080a] border border-[#10B981]/10 flex flex-col justify-between p-6 select-none font-sans text-white/90 text-left">
+          <div className="flex justify-between items-center font-mono text-[6px] text-[#10B981]/40">
+            <span>SAYFA 02 // TASARIM</span>
+            <span>ODAK: İLERİ TEK</span>
+          </div>
+          <div className="my-auto text-left flex flex-col gap-2.5">
+            <span className="font-mono text-[8px] text-[#10B981] font-bold">// REKABETÇİ AVANTAJ</span>
+            <p className="font-serif italic text-xs text-white/85 leading-relaxed font-light">
+              Yenilikçilik, sadece yeni fikirler üretmek değil; bu fikirlerle işimizi ve sektörümüzü geleceğe taşımaktır.
+            </p>
+          </div>
+          <div className="flex justify-between items-center font-mono text-[5px] text-white/20">
+            <span>YENİLİKÇİLİK</span>
+            <span>A5_PORTRAIT_02</span>
+          </div>
+        </div>
+      );
+    }
+    if (pageIdx === 3) {
+      return (
+        <div className="w-full h-full bg-[#08080a] border border-[#10B981]/10 flex flex-col justify-between p-5 select-none font-sans text-white/90 text-left">
+          <div className="flex justify-between items-center font-mono text-[6px] text-[#10B981]/40">
+            <span>SAYFA 03 // ŞEMA</span>
+            <span>SİSTEM: OTOMASYON</span>
+          </div>
+          <div className="flex-1 my-3 flex flex-col justify-center gap-1.5 text-[5px] font-mono text-[#10B981]/70">
+            <div className="p-1 border border-[#10B981]/10 flex justify-between">
+              <span>MÜHENDİSLİK</span>
+              <span>100% OK</span>
+            </div>
+            <div className="p-1 border border-[#10B981]/10 flex justify-between">
+              <span>İNOVATİF GÜÇ</span>
+              <span>100% EFF</span>
+            </div>
+          </div>
+          <div className="flex justify-between items-center font-mono text-[5px] text-white/20">
+            <span>YENİLİKÇİLİK</span>
+            <span>A5_PORTRAIT_03</span>
+          </div>
+        </div>
+      );
+    }
+    return (
+      <div className="w-full h-full bg-[#08080a] border border-[#10B981]/10 flex flex-col justify-between p-5 select-none font-sans text-white/90 text-left">
+        <div className="flex justify-between items-center font-mono text-[6px] text-[#10B981]/40">
+          <span>SAYFA 04 // FİNAL</span>
+          <span>İNOVASYON: TAMAM</span>
+        </div>
+        <div className="my-auto flex flex-col items-center gap-2 text-center">
+          <span className="font-mono text-[7px] border border-[#10B981]/30 py-1 px-2.5 rounded text-[#10B981]">SYSTEM END</span>
+          <p className="font-serif italic text-[11px] text-white/60 leading-relaxed">
+            Yaratıcı fikirler hayata geçti, gelecek kaydedildi.
+          </p>
+        </div>
+        <div className="flex justify-between items-center font-mono text-[5px] text-white/20">
+          <span>YENİLİKÇİLİK</span>
+          <span>A5_PORTRAIT_04</span>
+        </div>
+      </div>
+    );
+  };
+
+  const renderRetroSectionHeader = (num: string, title: string) => {
+    return (
+      <div className="flex flex-col relative mb-5">
+        <div className="absolute -top-12 -left-4 font-mono text-[96px] sm:text-[120px] font-black text-[#A86CFF]/5 select-none pointer-events-none leading-none tracking-tighter">
+          {num}
+        </div>
+        <div className="font-pixel text-[#A86CFF] text-[8px] sm:text-[9px] tracking-[0.1em] font-bold uppercase mb-5 z-10">
+          AI AGENT FACTORY'26
+        </div>
+        <h3 className="font-pixel text-lg sm:text-2xl text-white uppercase tracking-wider z-10">
+          {title}
+        </h3>
+      </div>
+    );
+  };
+
+  const renderRetroDivider = () => {
+    return (
+      <div className="w-full py-16 flex items-center justify-center relative overflow-hidden select-none pointer-events-none my-16">
+        <div className="w-full h-[2px] bg-gradient-to-r from-transparent via-[#A86CFF]/40 to-transparent relative shadow-[0_0_8px_#8F5BFF]">
+          <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-2.5 h-2.5 bg-[#C67CFF] border border-[#0B0815] animate-pulse" />
+        </div>
+      </div>
+    );
+  };
+
+  const renderNeonDivider = (color: string = '#00F0FF') => {
+    return (
+      <div className="w-full py-12 flex items-center justify-center relative overflow-hidden select-none pointer-events-none my-12">
+        <div
+          className="w-full h-[2px] bg-gradient-to-r from-transparent via-current to-transparent relative"
+          style={{
+            color: color,
+            boxShadow: `0 0 10px ${color}, 0 0 4px ${color}`,
+            opacity: 0.5
+          }}
+        />
+      </div>
+    );
+  };
+
+  const renderNestedTrianglesBackground = (accentColor: string = '#00F0FF') => {
+    return (
+      <div className="absolute inset-0 pointer-events-none z-0 overflow-hidden opacity-25 select-none">
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[700px] flex items-center justify-center">
+          <div className="absolute font-sans font-black text-[120px] tracking-[0.2em] text-[#00F0FF]/3 select-none pointer-events-none transform translate-y-6">
+            R&D
+          </div>
+          <svg className="w-full h-full" viewBox="0 0 100 100" fill="none">
+            {Array.from({ length: 12 }).map((_, i) => {
+              const scale = 1 - i * 0.07;
+              const rot = i * 1.5;
+              if (scale <= 0) return null;
+              return (
+                <polygon
+                  key={i}
+                  points="50,12 12,83 88,83"
+                  stroke={accentColor}
+                  strokeWidth={0.15 + i * 0.05}
+                  style={{
+                    transform: `scale(${scale}) rotate(${rot}deg)`,
+                    transformOrigin: '50% 60%',
+                    opacity: 0.15 - i * 0.008,
+                  }}
+                />
+              );
+            })}
+          </svg>
+        </div>
+      </div>
+    );
+  };
+
   const renderGridCell = (slotKey: string, cellIndexLabel: number) => {
     const img = socialMediaData.images[slotKey];
     const caption = socialMediaData.captions[slotKey] || '';
@@ -3157,6 +3827,334 @@ function CategoryViewInner({ categoryId, onBack }: CategoryViewProps) {
       </div>
     );
   };
+
+  if (categoryId === 'photography') {
+      const fotoromanList = [
+        {
+          idx: 1,
+          no: "01",
+          title: "Çobancık",
+          subtitle: "Belgesel Fotoroman Projesi",
+          desc: "8 yaşındaki bir çocuğun doğayla, sürüsüyle ve kendi çocukluğuyla olan mücadelesini anlatan bir görsel hikaye çalışması. Fotoğraf çekimlerinden metin kurgusuna kadar üstlendiğim bu projede; minik bir bedenin yaşamın ağır kilitlerini ve sürgülerini açma çabasını kare kare fotoğraflayarak zamansız bir anlatı oluşturmayı hedefledim.",
+          tags: ["Belgesel", "Fotoroman", "Portre", "Doğa"]
+        },
+        {
+          idx: 2,
+          no: "02",
+          title: "Ekmek Teknesi",
+          subtitle: "Belgesel Görsel Anlatı",
+          desc: "İstanbul kıyılarında sabahın ilk ışıklarıyla başlayan olta balıkçılığı rutinini ve Cemil Amca'nın denizle olan sessiz bağını ele alan fotoroman çalışması. Proje; insan, emek ve şehir dinamiklerini zamansız bir monokrom estetik ve detay odaklı bir kurguyla bir araya getirmektedir.",
+          tags: ["Belgesel", "Görsel Anlatı", "Monokrom", "İstanbul"]
+        },
+        {
+          idx: 3,
+          no: "03",
+          title: "Herhangi Bir Yer",
+          subtitle: "Belgesel Görsel Anlatı",
+          desc: "Doğanın kendi ritminde filizlenen ufak detayların ve insanın toprağa dönüş hikayesinin fotoroman çalışması. Bu projede; bir ekmeğin, bir çiçeğin ve bir yolun insana yettiği o yalın yaşam felsefesini detay odaklı ve monokrom bir kompozisyon devamlılığıyla sunmaktadır.",
+          tags: ["Belgesel", "Doğa", "Kompozisyon", "Monokrom"]
+        },
+        {
+          idx: 4,
+          no: "04",
+          title: "Herhangi Bir An",
+          subtitle: "Belgesel Görsel Öykü",
+          desc: "İstanbul kıyılarında sıradan bir günün içinde filizlenen küçük bir rastlantının ve solmuş bir gülün hikayesi. Çekimlerinden sayfa düzeni kurgusuna kadar hazırladığım bu fotoroman; şehir monologlarını, insan ifadelerini ve mekansal dokuyu detay odaklı, zamansız bir monokrom estetikle bir araya getiriyor.",
+          tags: ["Görsel Öykü", "Monokrom", "Sokak", "İstanbul"]
+        },
+        {
+          idx: 5,
+          no: "05",
+          title: "Herhangi Biri",
+          subtitle: "Belgesel Görsel Anlatı",
+          desc: "Modern insanın kalabalıklar içindeki yalnızlığını, gitmek ile kalmak arasında sıkışan bir karakterin adımları üzerinden takip eden fotoroman projesi. Bu çalışma; yansımalar, portre ifadeleri ve yolculuk temasını zamansız bir monokrom bütünlük ve güçlü bir iç ses anlatımıyla bir araya getiriyor.",
+          tags: ["Görsel Anlatı", "Yolculuk", "Monokrom", "Portre"]
+        }
+      ];
+
+      return (
+        <div className="relative min-h-screen bg-[#070707] text-white overflow-hidden pb-40 selection:bg-[#10B981] selection:text-black">
+          {/* Hidden single uploader */}
+          <input
+            type="file"
+            ref={photographySingleFileInputRef}
+            onChange={(e) => {
+              if (e.target.files && e.target.files[0] && currentPhotographyUploadSlot.current) {
+                const file = e.target.files[0];
+                compressAndResizeImage(file)
+                  .then((compressedUrl) => {
+                    if (currentPhotographyUploadSlot.current) {
+                      updateFotoromanAsset(currentPhotographyUploadSlot.current, compressedUrl);
+                    }
+                  })
+                  .catch((err) => {
+                    console.error("Photography upload compression error:", err);
+                    const reader = new FileReader();
+                    reader.onloadend = () => {
+                      if (typeof reader.result === 'string' && currentPhotographyUploadSlot.current) {
+                        updateFotoromanAsset(currentPhotographyUploadSlot.current, reader.result);
+                      }
+                    };
+                    reader.readAsDataURL(file);
+                  })
+                  .finally(() => {
+                    e.target.value = '';
+                  });
+              }
+            }}
+            accept="image/*"
+            className="hidden"
+          />
+
+          {/* Dynamic Grid Background with faint green radial spotlight */}
+          <div className="absolute inset-0 z-0 bg-[radial-gradient(rgba(16,185,129,0.015)_1px,transparent_1px)] bg-[size:32px_32px] pointer-events-none" />
+          <div className="absolute top-1/4 left-1/2 -translate-x-1/2 w-[700px] h-[700px] bg-[#10B981]/[0.012] rounded-full filter blur-3xl pointer-events-none" />
+          <div className="paper-grain opacity-85" />
+
+          <div className="max-w-6xl mx-auto pt-28 sm:pt-32 px-6 sm:px-12 relative z-10 text-left">
+            {/* Back Button */}
+            <div className="mb-12">
+              <motion.button
+                onClick={onBack}
+                whileHover={{ scale: 1.05, x: -3 }}
+                whileTap={{ scale: 0.98 }}
+                className="inline-flex items-center gap-2.5 group cursor-pointer bg-[#10B981] text-black hover:bg-[#059669] transition-all duration-300 py-2.5 px-5 rounded-xl shadow-[0_4px_20px_rgba(16,185,129,0.25)] font-black font-mono text-[10px] tracking-widest uppercase"
+              >
+                <ArrowLeft className="w-4 h-4 transition-transform group-hover:-translate-x-0.5 text-black" />
+                <span>← Çalışmalarıma Dön</span>
+              </motion.button>
+            </div>
+
+            {/* Title Block */}
+            <div className="mb-20 border-b border-white/5 pb-12">
+              <span className="font-mono text-[10px] tracking-[0.3em] uppercase font-bold block mb-4 animate-fade-in" style={{ color: catHeading.color }}>
+                {catHeading.section}
+              </span>
+              <h1 className="flex flex-col items-start leading-none mb-6">
+                <span className="font-sans font-black text-3xl sm:text-4xl md:text-5xl uppercase tracking-tight text-white">{catHeading.part1}</span>
+                <span className="font-serif italic font-light text-2xl sm:text-3xl md:text-4xl tracking-tight mt-1" style={{ color: catHeading.color }}>{catHeading.part2}</span>
+              </h1>
+              <p className="font-sans text-sm sm:text-base text-white/55 leading-relaxed font-light max-w-3xl">
+                {catHeading.desc}
+              </p>
+            </div>
+
+            {/* List of 5 Fotoromans Stacked Vertically */}
+            <div className="flex flex-col gap-24">
+              {fotoromanList.map((fotoroman) => {
+                const fKey = `fotoroman_${fotoroman.idx}`;
+                const hasFourPages = fotoroman.idx === 4 || fotoroman.idx === 5;
+                const activePageIdxRaw = fotoromanData.activePageIdxs[fKey] ?? 0;
+                const activePageIdx = hasFourPages && activePageIdxRaw > 3 ? 0 : activePageIdxRaw;
+                const activeImgKey = `${fKey}_img_${activePageIdx}`;
+                const activeImgUrl = fotoromanData.images[activeImgKey] || null;
+
+                const pages = hasFourPages
+                  ? [
+                      { label: "Kapak", idx: 0 },
+                      { label: "Sayfa 1", idx: 1 },
+                      { label: "Sayfa 2", idx: 2 },
+                      { label: "Sayfa 3", idx: 3 }
+                    ]
+                  : [
+                      { label: "Kapak", idx: 0 },
+                      { label: "Sayfa 1", idx: 1 },
+                      { label: "Sayfa 2", idx: 2 },
+                      { label: "Sayfa 3", idx: 3 },
+                      { label: "Sayfa 4", idx: 4 }
+                    ];
+
+                return (
+                  <div 
+                    key={fotoroman.idx} 
+                    className="group border border-white/5 bg-white/[0.005] hover:bg-white/[0.015] rounded-3xl p-6 sm:p-8 lg:p-10 transition-all duration-500 relative flex flex-col lg:flex-row gap-8 lg:gap-12 items-stretch"
+                  >
+                    <div className="absolute inset-0 rounded-3xl border border-[#10B981]/0 group-hover:border-[#10B981]/10 pointer-events-none transition-all duration-700" />
+                    
+                    {/* Left Side: Editorial Context & Information (Left aligned and compact) */}
+                    <div className="w-full lg:w-[320px] shrink-0 flex flex-col justify-between py-2 text-left">
+                      <div>
+                        <div className="flex items-center gap-3 mb-6">
+                          <span className="font-mono text-xs text-[#10B981] font-bold">
+                            [{fotoroman.no}]
+                          </span>
+                          <span className="w-1.5 h-1.5 rounded-full bg-[#10B981]" />
+                          <span className="font-mono text-[8px] tracking-widest text-white/30 uppercase">
+                            // FOTOROMAN SERİSİ
+                          </span>
+                        </div>
+
+                        {(() => {
+                          const words = fotoroman.title.trim().split(/\s+/);
+                          const firstPart = words.slice(0, words.length - 1).join(" ").toUpperCase();
+                          const lastWord = words[words.length - 1];
+                          const lastWordFormatted = lastWord.charAt(0).toUpperCase() + lastWord.slice(1).toLowerCase();
+                          return (
+                            <h2 className="flex flex-col items-start leading-none mb-2 select-none">
+                              <span className="font-display font-black text-2xl sm:text-3xl uppercase tracking-tighter text-white group-hover:text-[#10B981] transition-colors">
+                                {firstPart}
+                              </span>
+                              <span className="font-serif italic font-light text-xl sm:text-2xl text-[#10B981] tracking-tight mt-1">
+                                {lastWordFormatted}
+                              </span>
+                            </h2>
+                          );
+                        })()}
+                        
+                        <p className="font-mono text-[9px] text-[#10B981]/50 uppercase tracking-widest mb-6">
+                          {fotoroman.subtitle}
+                        </p>
+
+                        <p className="font-sans text-xs sm:text-sm text-white/50 leading-relaxed font-light mb-8 max-w-lg">
+                          {fotoroman.desc}
+                        </p>
+                      </div>
+
+                      <div className="mt-auto">
+                        <div className="flex flex-wrap gap-2 mb-8">
+                          {fotoroman.tags.map((tag, tIdx) => (
+                            <span 
+                              key={tIdx} 
+                              className="font-mono text-[8px] text-white/35 bg-white/5 border border-white/5 rounded px-2.5 py-1 uppercase tracking-wider"
+                            >
+                              {tag}
+                            </span>
+                          ))}
+                        </div>
+
+                        <div className="flex items-center gap-2 text-white/20 font-mono text-[9px]">
+                          <span>AKTİF GÖRÜNÜM:</span>
+                          <span className="text-[#10B981] font-bold">
+                            {activePageIdx === 0 ? "KAPAK GÖRSELİ" : `SAYFA ÖRNEĞİ 0${activePageIdx}`}
+                          </span>
+                        </div>
+                      </div>
+                    </div>
+
+                    {/* Right Side: Interactive Fotoroman Workspace Grid (Much larger image space) */}
+                    <div className="flex-1 flex flex-col md:flex-row items-center gap-8 lg:gap-12 justify-center min-w-0 bg-white/[0.003] border border-white/5 rounded-2xl p-6 lg:p-8">
+                      <div className="flex flex-col items-center gap-3 shrink-0">
+                        <span className="font-mono text-[7px] tracking-[0.2em] text-[#10B981]/60 uppercase">// A5 KAPAK & ODAK ALANI</span>
+                        
+                        <div 
+                          className={`relative w-[280px] h-[396px] sm:w-[320px] sm:h-[452px] rounded-2xl border border-white/10 bg-[#0c0c10] overflow-hidden shadow-2xl flex items-center justify-center group/cover ${isLocked ? 'cursor-default' : 'cursor-pointer hover:border-[#10B981]/30'} transition-colors`}
+                        >
+                          {activeImgUrl ? (
+                            <img 
+                              src={activeImgUrl} 
+                              alt="Fotoroman page focus" 
+                              className="w-full h-full object-cover transition-transform duration-700" 
+                            />
+                          ) : (
+                            renderFotoromanDefaultSVG(fotoroman.idx, activePageIdx)
+                          )}
+
+                          {!isLocked && (
+                            <div 
+                              onClick={() => {
+                                currentPhotographyUploadSlot.current = activeImgKey;
+                                photographySingleFileInputRef.current?.click();
+                              }}
+                              className="absolute inset-0 bg-black/75 backdrop-blur-sm opacity-0 group-hover/cover:opacity-100 transition-opacity duration-300 flex flex-col items-center justify-center gap-2 z-30 cursor-pointer"
+                            >
+                              <div className="w-9 h-9 rounded-full bg-[#10B981]/15 border border-[#10B981]/40 flex items-center justify-center text-[#10B981]">
+                                <Upload className="w-4 h-4" />
+                              </div>
+                              <span className="font-mono text-[8px] text-[#10B981] font-bold tracking-widest uppercase">GÖRSELİ DEĞİŞTİR</span>
+                              <span className="font-mono text-[6px] text-white/40 uppercase">
+                                {activePageIdx === 0 ? "Kapak" : `Sayfa ${activePageIdx}`} Alanı
+                              </span>
+                            </div>
+                          )}
+                        </div>
+                      </div>
+
+                      <div className="flex md:flex-col flex-wrap gap-4 justify-center items-center">
+                        <span className="font-mono text-[7px] tracking-[0.2em] text-white/20 uppercase md:mb-1 select-none">// SAYFALAR</span>
+                        
+                        {pages.map((p) => {
+                          const pImgKey = `${fKey}_img_${p.idx}`;
+                          const pImgUrl = fotoromanData.images[pImgKey] || null;
+                          const isPageActive = activePageIdx === p.idx;
+
+                          return (
+                            <div 
+                              key={p.idx} 
+                              className="flex flex-col items-center gap-1.5"
+                            >
+                              <div 
+                                onClick={() => updateFotoromanActivePage(fKey, p.idx)}
+                                className={`relative w-[68px] h-[96px] rounded-lg border bg-[#050508] overflow-hidden cursor-pointer transition-all duration-300 ${
+                                  isPageActive 
+                                    ? "border-[#10B981] scale-105 ring-2 ring-[#10B981]/20 shadow-[0_0_15px_rgba(16,185,129,0.15)]" 
+                                    : "border-white/10 hover:border-white/30 hover:scale-102"
+                                }`}
+                              >
+                                {pImgUrl ? (
+                                  <img 
+                                    src={pImgUrl} 
+                                    alt="Fotoroman page thumb" 
+                                    className="w-full h-full object-cover" 
+                                  />
+                                ) : (
+                                  <div className="w-[200px] h-[283px] scale-[0.34] origin-top-left pointer-events-none opacity-40">
+                                    {renderFotoromanDefaultSVG(fotoroman.idx, p.idx)}
+                                  </div>
+                                )}
+
+                                {!isLocked && (
+                                  <button
+                                    onClick={(e) => {
+                                      e.stopPropagation();
+                                      currentPhotographyUploadSlot.current = pImgKey;
+                                      photographySingleFileInputRef.current?.click();
+                                    }}
+                                    className="absolute bottom-1 right-1 w-4 h-4 rounded-md bg-black/60 hover:bg-black border border-white/10 hover:border-[#10B981]/50 flex items-center justify-center text-white hover:text-[#10B981] transition-colors"
+                                  >
+                                    <Upload className="w-2.5 h-2.5" />
+                                  </button>
+                                )}
+                              </div>
+
+                              <span className={`font-mono text-[6px] tracking-wider uppercase font-bold ${
+                                isPageActive ? "text-[#10B981]" : "text-white/30"
+                              }`}>
+                                {p.label}
+                              </span>
+                            </div>
+                          );
+                        })}
+                      </div>
+                    </div>
+                  </div>
+                );
+              })}
+            </div>
+
+            <div className="max-w-6xl mx-auto border-t border-white/5 pt-16 mt-32 text-center relative z-10 flex flex-col items-center gap-6">
+              <div className="flex flex-col items-center gap-2 select-none">
+                <span className="font-mono text-[8px] tracking-[0.4em] text-[#10B981]/40 uppercase">// END_OF_GALLERY</span>
+                <span className="font-serif italic text-white/50 text-sm">Tüm Çalışmaları İncelediniz</span>
+              </div>
+              
+              <motion.button
+                onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
+                whileHover={{ scale: 1.05, y: -2 }}
+                whileTap={{ scale: 0.95 }}
+                className="inline-flex items-center gap-2 group cursor-pointer bg-white/5 border border-white/10 text-[#10B981] hover:text-[#10B981] hover:border-[#10B981]/45 hover:bg-[#10B981]/5 font-bold font-mono text-[9px] tracking-widest uppercase py-3.5 px-8 rounded-xl transition-all duration-300 shadow-[0_0_15px_rgba(16,185,129,0.05)]"
+              >
+                <ArrowUp className="w-3.5 h-3.5 transition-transform group-hover:-translate-y-0.5 text-[#10B981]" />
+                <span>Başa Dön</span>
+              </motion.button>
+              
+              <div className="text-[6.5px] font-mono text-white/15 tracking-widest uppercase mt-4">
+                © 2026 DESIGN PORTFOLIO // ALL RIGHTS RESERVED
+              </div>
+            </div>
+          </div>
+        </div>
+      );
+    }
 
   if (categoryId === 'social-media') {
     return (
@@ -5886,121 +6884,1469 @@ function CategoryViewInner({ categoryId, onBack }: CategoryViewProps) {
                   </>
                 )}
 
-                {selectedProjectId === 'ai-factory' && (
-                  <>
-                    <motion.div
-                      initial={{ opacity: 0, y: 40, filter: 'blur(8px)' }}
-                      whileInView={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
-                      viewport={{ once: true, margin: "-120px" }}
-                      transition={{ duration: 0.9, ease: [0.16, 1, 0.3, 1] }}
-                      className="w-full flex flex-col items-center max-w-5xl mx-auto"
-                    >
-                      {renderRetroSectionHeader("01", "Tasarım Kimliği")}
-                      <div className="grid grid-cols-1 md:grid-cols-2 gap-8 w-full">
-                        <ImageUploadPlaceholder image={aiFactoryImage} onUpload={setAiFactoryImage} fileInputRef={aiFactoryFileInputRef} title="Kimlik Sol" aspect="aspect-[16/9]" theme="retro" isLocked={isLocked} />
-                        <ImageUploadPlaceholder image={aiTunnelImage} onUpload={setAiTunnelImage} fileInputRef={aiTunnelFileInputRef} title="Kimlik Sağ" aspect="aspect-[16/9]" theme="retro" isLocked={isLocked} />
-                      </div>
-                    </motion.div>
-
-                    {renderRetroDivider()}
-
-                    <motion.div
-                      initial={{ opacity: 0, y: 40, filter: 'blur(8px)' }}
-                      whileInView={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
-                      viewport={{ once: true, margin: "-120px" }}
-                      transition={{ duration: 0.9, ease: [0.16, 1, 0.3, 1] }}
-                      className="flex flex-col lg:flex-row items-stretch gap-8 lg:gap-16"
-                    >
-                      <div className="lg:w-7/12">
-                        <ImageUploadPlaceholder image={backdropImage} onUpload={setBackdropImage} fileInputRef={backdropFileInputRef} title="Backdrop" aspect="aspect-[16/9]" theme="retro" isLocked={isLocked} />
-                      </div>
-                      <div className="lg:w-5/12 flex flex-col justify-center py-6">
-                        {renderRetroSectionHeader("02", "Backdrop")}
-                      </div>
-                    </motion.div>
-                  </>
-                )}
-
-                {selectedProjectId === 'rd' && (
-                  <motion.div
-                    initial={{ opacity: 0, y: 40, filter: 'blur(8px)' }}
-                    whileInView={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
-                    viewport={{ once: true, margin: "-120px" }}
-                    transition={{ duration: 0.9, ease: [0.16, 1, 0.3, 1] }}
-                    className="flex flex-col lg:flex-row items-stretch gap-8 lg:gap-16"
-                  >
-                    <div className="lg:w-5/12 flex flex-col justify-center py-6">
-                      <h2 className="font-display font-black text-4xl text-white uppercase mb-6">RESEARCH & DEVELOPMENT</h2>
-                    </div>
-                    <div className="lg:w-7/12">
-                      <ImageUploadPlaceholder image={rdImage} onUpload={setRdImage} fileInputRef={rdFileInputRef} title="R&D" isLocked={isLocked} />
-                    </div>
-                  </motion.div>
-                )}
-
-                {selectedProjectId === 'egitim' && (
-                  <div className="flex flex-col gap-24 md:gap-32 pb-20">
-                    <motion.div
-                      initial={{ opacity: 0, y: 30 }}
-                      whileInView={{ opacity: 1, y: 0 }}
-                      viewport={{ once: true, margin: "-100px" }}
-                      className="flex flex-col lg:flex-row items-center gap-12 relative z-10"
-                    >
-                      <div className="lg:w-5/12 text-left">
-                        <h2 className="font-sans font-black text-3xl text-white uppercase">ARCHITECHT ACADEMY</h2>
-                      </div>
-                      <div className="lg:w-7/12 w-full">
-                        <ImageUploadPlaceholder image={egitimThemeImage} onUpload={setEgitimThemeImage} fileInputRef={egitimThemeFileInputRef} title="Academy Hero" aspect="aspect-[16/9]" isLocked={isLocked} />
-                      </div>
-                    </motion.div>
-
-                    <motion.div
-                      initial={{ opacity: 0, y: 40 }}
-                      whileInView={{ opacity: 1, y: 0 }}
-                      viewport={{ once: true, margin: "-120px" }}
-                      className="grid grid-cols-1 md:grid-cols-3 gap-6 mt-4"
-                    >
-                      <ImageUploadPlaceholder image={egitimKit1Image} onUpload={setEgitimKit1Image} fileInputRef={egitimKit1FileInputRef} title="Kit 1" aspect="aspect-square" isLocked={isLocked} />
-                      <ImageUploadPlaceholder image={egitimKit2Image} onUpload={setEgitimKit2Image} fileInputRef={egitimKit2FileInputRef} title="Kit 2" aspect="aspect-square" isLocked={isLocked} />
-                      <ImageUploadPlaceholder image={egitimKit3Image} onUpload={setEgitimKit3Image} fileInputRef={egitimKit3FileInputRef} title="Kit 3" aspect="aspect-square" isLocked={isLocked} />
-                    </motion.div>
+          {selectedProjectId === 'ai-factory' && (
+            /* ==========================================
+               REDESIGNED AI AGENT FACTORY SECTIONS (IMMERSIVE & DETAILED)
+               ========================================== */
+            <>
+              {/* Section 01: Tasarım Kimliği */}
+              <motion.div 
+                initial={{ opacity: 0, y: 40, filter: 'blur(8px)' }}
+                whileInView={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
+                viewport={{ once: true, margin: "-120px" }}
+                transition={{ duration: 0.9, ease: [0.16, 1, 0.3, 1] }}
+                className="w-full flex flex-col items-center max-w-5xl mx-auto"
+              >
+                {/* Top Section Header */}
+                <div className="flex flex-col items-center text-center relative mb-8">
+                  {/* Huge transparent number */}
+                  <div className="absolute -top-12 left-1/2 -translate-x-1/2 font-mono text-[96px] sm:text-[120px] font-black text-[#A86CFF]/5 select-none pointer-events-none leading-none tracking-tighter">
+                    01
                   </div>
-                )}
+                  {/* small pixel label */}
+                  <div className="font-pixel text-[#A86CFF] text-[10px] sm:text-[12px] tracking-[0.1em] font-bold uppercase mb-4 z-10">
+                    AI AGENT FACTORY'26
+                  </div>
+                  {/* Large section title */}
+                  <h3 className="font-pixel text-lg sm:text-2xl text-white uppercase tracking-wider z-10">
+                    Tasarım Kimliği
+                  </h3>
+                </div>
 
-                {selectedProjectId === 'rd-techathon-2026' && (
-                  <>
-                    <motion.div
-                      initial={{ opacity: 0, y: 40 }}
-                      whileInView={{ opacity: 1, y: 0 }}
-                      viewport={{ once: true }}
-                      className="flex flex-col lg:flex-row items-center gap-8"
-                    >
-                      <div className="lg:w-5/12 text-left">
-                        <h3 className="font-sans font-black text-2xl text-white uppercase">R&D Techathon 2026 Identity</h3>
-                      </div>
-                      <div className="lg:w-7/12 w-full">
-                        <ImageUploadPlaceholder image={rdSection1Image} onUpload={setRdSection1Image} fileInputRef={rdSection1FileInputRef} title="Identity" aspect="aspect-[16/9]" isLocked={isLocked} />
-                      </div>
-                    </motion.div>
+                {/* Description Card with retro pixel theme */}
+                <div className="w-full max-w-4xl bg-[#130f26]/60 border-2 border-[#8F5BFF]/30 rounded-lg p-6 sm:p-8 shadow-[inset_0_0_15px_rgba(168,108,255,0.05),4px_4px_0px_rgba(143,91,255,0.1)] text-left relative overflow-hidden mb-10">
+                  {/* Retro Pixel corner accents */}
+                  <div className="absolute top-0 left-0 w-1.5 h-1.5 bg-[#8F5BFF]" />
+                  <div className="absolute top-0 right-0 w-1.5 h-1.5 bg-[#8F5BFF]" />
+                  <div className="absolute bottom-0 left-0 w-1.5 h-1.5 bg-[#8F5BFF]" />
+                  <div className="absolute bottom-0 right-0 w-1.5 h-1.5 bg-[#8F5BFF]" />
+                  
+                  <p className="font-sans text-sm sm:text-base text-white/75 leading-relaxed font-light mb-4">
+                    Bu tasarımın temel görsel felsefesini, etkinliğin arkasındaki "Disruptive (Yıkıcı) Teknolojiler" kavramı ile en ilkel canlılardan biri olan dinozor maskotu arasındaki güçlü ironiden yola çıkarak kurguladık.
+                  </p>
+                  <p className="font-sans text-sm sm:text-base text-white/75 leading-relaxed font-light mb-4">
+                    Geleceğin en üst noktası olan yapay zekâ ajanlarını, tarihin en eski ve vahşi unsuruyla özdeşleştirerek akılda kalıcı, düşündürücü ve yüksek grafik kontrastlı bir zıtlık yaratmayı hedefledim.
+                  </p>
+                  <p className="font-sans text-sm sm:text-base text-white/75 leading-relaxed font-light">
+                    Yapay zekânın soğuk rasyonelliğini morun teknolojik tonlarıyla dengelerken, 8-bit piksel estetiğiyle de bu ironiyi eğlenceli ve yaşayan bir oyun evreni diliyle tüm lansmana yaymayı amaçladık.
+                  </p>
+                </div>
 
-                    {renderNeonDivider('#00F0FF')}
+                {/* TWO IMAGE AREAS ON THE SAME ROW */}
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-8 w-full">
+                  <div className="flex justify-center items-center">
+                    <div className="w-full aspect-[16/9]">
+                      <ImageUploadPlaceholder 
+                        image={aiFactoryImage}
+                        onUpload={setAiFactoryImage}
+                        fileInputRef={aiFactoryFileInputRef}
+                        title="Kimlik Sol Görsel"
+                        aspect="aspect-[16/9]"
+                        theme="retro"
+                        isLocked={isLocked}
+                        onLockedClick={() => handleLockedClick(aiFactoryFileInputRef)}
+                      />
+                    </div>
+                  </div>
+                  <div className="flex justify-center items-center">
+                    <div className="w-full aspect-[16/9]">
+                      <ImageUploadPlaceholder 
+                        image={aiFactoryThemeImage}
+                        onUpload={setAiFactoryThemeImage}
+                        fileInputRef={aiFactoryThemeFileInputRef}
+                        title="Kimlik Sağ Görsel"
+                        aspect="aspect-[16/9]"
+                        theme="retro"
+                        isLocked={isLocked}
+                        onLockedClick={() => handleLockedClick(aiFactoryThemeFileInputRef)}
+                      />
+                    </div>
+                  </div>
+                </div>
+              </motion.div>
 
-                    <motion.div
-                      initial={{ opacity: 0, y: 40 }}
-                      whileInView={{ opacity: 1, y: 0 }}
-                      className="flex flex-col lg:flex-row-reverse items-center gap-8"
-                    >
-                      <div className="lg:w-5/12 text-left">
-                        <h3 className="font-sans font-black text-2xl text-white uppercase">Yaka Kartı</h3>
-                      </div>
-                      <div className="lg:w-7/12 w-full flex justify-center">
-                        <div className="w-[280px]">
-                          <ImageUploadPlaceholder image={yakaKartiSide === 'front' ? rdYakaKartiFrontImage : rdYakaKartiBackImage} onUpload={yakaKartiSide === 'front' ? setRdYakaKartiFrontImage : setRdYakaKartiBackImage} fileInputRef={yakaKartiSide === 'front' ? rdYakaKartiFrontFileInputRef : rdYakaKartiBackFileInputRef} title="Yaka Karti" aspect="aspect-[153/218]" isLocked={isLocked} />
+              {renderRetroDivider()}
+
+              {/* Section 02: Backdrop */}
+              <motion.div 
+                initial={{ opacity: 0, y: 40, filter: 'blur(8px)' }}
+                whileInView={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
+                viewport={{ once: true, margin: "-120px" }}
+                transition={{ duration: 0.9, ease: [0.16, 1, 0.3, 1] }}
+                className="flex flex-col lg:flex-row items-stretch gap-8 lg:gap-16"
+              >
+                {/* Left: 16:9 placeholder */}
+                <div className="lg:w-7/12">
+                  <ImageUploadPlaceholder 
+                    image={aiFactoryBackdropImage}
+                    onUpload={setAiFactoryBackdropImage}
+                    fileInputRef={aiFactoryBackdropFileInputRef}
+                    title="Backdrop Tasarımı"
+                    aspect="aspect-[16/9]"
+                    theme="retro"
+                    isLocked={isLocked}
+                    onLockedClick={() => handleLockedClick(aiFactoryBackdropFileInputRef)}
+                  />
+                </div>
+                
+                {/* Right: Description panel */}
+                <div className="lg:w-5/12 flex flex-col justify-center py-6">
+                  {renderRetroSectionHeader("02", "Backdrop")}
+                  <div className="space-y-4">
+                    <p className="font-sans text-sm sm:text-base text-white/70 leading-relaxed font-light">
+                      Etkinlik alanının merkez üssü olarak kurguladığım, katılımcıların önünde fotoğraf çekileceği 5×3 metre boyutlarındaki makro sahne arkası panosudur.
+                    </p>
+                    <p className="font-sans text-sm sm:text-base text-white/70 leading-relaxed font-light">
+                      Lansmanın kurumsal mor tonlarını ve ironik 8-bit piksel evrenini devasa ölçekte mekâna yayarak katılımcıları ilk andan itibaren bu sıra dışı temayla sarmalamayı hedefledim.
+                    </p>
+                  </div>
+                </div>
+              </motion.div>
+
+              {renderRetroDivider()}
+
+              {/* Section 03: Yönlendirme */}
+              <motion.div 
+                initial={{ opacity: 0, y: 40, filter: 'blur(8px)' }}
+                whileInView={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
+                viewport={{ once: true, margin: "-120px" }}
+                transition={{ duration: 0.9, ease: [0.16, 1, 0.3, 1] }}
+                className="flex flex-col lg:flex-row items-stretch gap-8 lg:gap-16"
+              >
+                {/* Left: 240x330 placeholder (visually dominant size) */}
+                <div className="lg:w-6/12 flex justify-center items-center">
+                  <div className="w-[420px] max-w-full">
+                    <ImageUploadPlaceholder 
+                       image={aiFactoryDirectionImage}
+                       onUpload={setAiFactoryDirectionImage}
+                       fileInputRef={aiFactoryDirectionFileInputRef}
+                       title="Yönlendirme Ünitesi"
+                       aspect="aspect-[240/330]"
+                       theme="retro"
+                       isLocked={isLocked}
+                       onLockedClick={() => handleLockedClick(aiFactoryDirectionFileInputRef)}
+                    />
+                  </div>
+                </div>
+                
+                {/* Right: Description */}
+                <div className="lg:w-6/12 flex flex-col justify-center py-6">
+                  {renderRetroSectionHeader("03", "Yönlendirme")}
+                  <div className="space-y-4">
+                    <p className="font-sans text-sm sm:text-base text-white/70 leading-relaxed font-light">
+                      Fiziksel etkinlik alanındaki bu dikey panoyu basit bir yer tarifi tabelası olmaktan çıkarıp konseptin ironik dünyasını alanda devleştirmeyi amaçladım.
+                    </p>
+                    <p className="font-sans text-sm sm:text-base text-white/70 leading-relaxed font-light">
+                      Yaklaşık iki metre boyundaki bu kuleyi robot ve dinozor maskotlarıyla bezeyerek katılımcıların dikkatini anında çeken, önünde fotoğraf çekilmek isteyecekleri kadar ilgi çekici ve merak uyandırıcı bir alan nesnesine dönüştürdüm.
+                    </p>
+                  </div>
+                </div>
+              </motion.div>
+
+              {renderRetroDivider()}
+
+              {/* Section 04: Şipşak Foto Deneyimi */}
+              <motion.div 
+                initial={{ opacity: 0, y: 40, filter: 'blur(8px)' }}
+                whileInView={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
+                viewport={{ once: true, margin: "-120px" }}
+                transition={{ duration: 0.9, ease: [0.16, 1, 0.3, 1] }}
+                className="w-full flex flex-col lg:flex-row items-stretch gap-8 lg:gap-16 max-w-4xl mx-auto"
+              >
+                {/* LEFT: square aspect ratio image */}
+                <div className="lg:w-5/12 flex justify-center items-center">
+                  <div className="w-[320px] max-w-full">
+                    <ImageUploadPlaceholder 
+                      image={aiFactoryFrameImage}
+                      onUpload={setAiFactoryFrameImage}
+                      fileInputRef={aiFactoryFrameFileInputRef}
+                      title="Fotoğraf Çerçevesi Şablonu"
+                      aspect="aspect-square"
+                      theme="retro"
+                      isLocked={isLocked}
+                      onLockedClick={() => handleLockedClick(aiFactoryFrameFileInputRef)}
+                    />
+                  </div>
+                </div>
+                
+                {/* RIGHT: description */}
+                <div className="lg:w-7/12 flex flex-col justify-center text-left py-6">
+                  {renderRetroSectionHeader("04", "Şipşak Foto Deneyimi")}
+                  <p className="font-sans text-sm sm:text-base text-white/70 leading-relaxed font-light">
+                    Etkinlik günü katılımcıların anlık fotoğraflarını çekip yapay zekâ entegrasyonuyla 8-bit oyun karakterlerine dönüştürdüğüm ve lansman çerçevesiyle anında basıp teslim ettiğim deneyim alanıdır. Amacım etkinlik konseptini fiziksel ve unutulmaz bir hatıraya dönüştürmekti.
+                  </p>
+                </div>
+              </motion.div>
+
+              {renderRetroDivider()}
+
+              {/* Section 05: Instagram Gönderisi */}
+              <motion.div 
+                initial={{ opacity: 0, y: 40, filter: 'blur(8px)' }}
+                whileInView={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
+                viewport={{ once: true, margin: "-120px" }}
+                transition={{ duration: 0.9, ease: [0.16, 1, 0.3, 1] }}
+                className="w-full flex flex-col items-center max-w-4xl mx-auto"
+              >
+                {renderRetroSectionHeader("05", "Instagram Gönderisi")}
+                
+                {/* Phone Mockup Container */}
+                <div className="relative w-full max-w-[380px] bg-[#0c0a1a] rounded-[50px] p-3.5 border-4 border-[#8F5BFF] shadow-[0_0_30px_rgba(143,91,255,0.25),8px_8px_0px_rgba(143,91,255,0.4)] my-6 overflow-hidden">
+                  {/* Speaker and Camera Cutout at the top */}
+                  <div className="absolute top-2 left-1/2 -translate-x-1/2 w-32 h-5 bg-black rounded-b-2xl z-40 flex items-center justify-center">
+                    <div className="w-12 h-1 bg-white/10 rounded-full mb-1" />
+                    <div className="w-2.5 h-2.5 bg-[#101010] rounded-full border border-white/5 absolute right-4 bottom-1" />
+                  </div>
+
+                  {/* Phone Screen Area */}
+                  <div className="bg-black rounded-[36px] overflow-hidden border border-white/5 pt-6 pb-4 flex flex-col relative">
+                    {/* Instagram App Header */}
+                    <div className="px-4 py-2 flex items-center justify-between border-b border-white/5">
+                      <div className="flex items-center gap-1.5">
+                        <div className="w-7 h-7 rounded-full bg-[#8F5BFF]/30 border border-[#A86CFF]/50 p-0.5 flex items-center justify-center">
+                          <span className="text-[10px] font-bold text-[#C67CFF]">🦖</span>
+                        </div>
+                        <div className="flex flex-col">
+                          <span className="font-sans text-[11px] font-bold text-white leading-tight">architecht</span>
+                          <span className="font-sans text-[8px] text-white/50 leading-none">AI Agent Factory'26</span>
                         </div>
                       </div>
-                    </motion.div>
-                  </>
-                )}
+                      <div className="flex items-center gap-1 text-white/40 hover:text-white/80 cursor-pointer">
+                        <span className="w-1 h-1 bg-white/40 rounded-full" />
+                        <span className="w-1 h-1 bg-white/40 rounded-full" />
+                        <span className="w-1 h-1 bg-white/40 rounded-full" />
+                      </div>
+                    </div>
+
+                    {/* Main Image Carousel Area with 4 upload placeholders */}
+                    <div className="relative w-full aspect-[4/5] bg-[#130f26]/40 overflow-hidden group">
+                      <AnimatePresence initial={false} mode="wait">
+                        <motion.div
+                          key={aiFactoryInstaActiveIdx}
+                          initial={{ opacity: 0, x: 50 }}
+                          animate={{ opacity: 1, x: 0 }}
+                          exit={{ opacity: 0, x: -50 }}
+                          transition={{ duration: 0.3 }}
+                          className="w-full h-full"
+                        >
+                          {aiFactoryInstaActiveIdx === 0 && (
+                            <ImageUploadPlaceholder 
+                              image={aiFactoryCarouselImage}
+                              onUpload={setAiFactoryCarouselImage}
+                              fileInputRef={aiFactoryCarouselFileInputRef}
+                              title="GÖNDERİ 1"
+                              aspect="aspect-[4/5]"
+                              theme="retro"
+                              isLocked={isLocked}
+                              onLockedClick={() => handleLockedClick(aiFactoryCarouselFileInputRef)}
+                            />
+                          )}
+                          {aiFactoryInstaActiveIdx === 1 && (
+                            <ImageUploadPlaceholder 
+                              image={aiFactoryInsta2Image}
+                              onUpload={setAiFactoryInsta2Image}
+                              fileInputRef={aiFactoryInsta2FileInputRef}
+                              title="GÖNDERİ 2"
+                              aspect="aspect-[4/5]"
+                              theme="retro"
+                              isLocked={isLocked}
+                              onLockedClick={() => handleLockedClick(aiFactoryInsta2FileInputRef)}
+                            />
+                          )}
+                          {aiFactoryInstaActiveIdx === 2 && (
+                            <ImageUploadPlaceholder 
+                              image={aiFactoryInsta3Image}
+                              onUpload={setAiFactoryInsta3Image}
+                              fileInputRef={aiFactoryInsta3FileInputRef}
+                              title="GÖNDERİ 3"
+                              aspect="aspect-[4/5]"
+                              theme="retro"
+                              isLocked={isLocked}
+                              onLockedClick={() => handleLockedClick(aiFactoryInsta3FileInputRef)}
+                            />
+                          )}
+                          {aiFactoryInstaActiveIdx === 3 && (
+                            <ImageUploadPlaceholder 
+                              image={aiFactoryInsta4Image}
+                              onUpload={setAiFactoryInsta4Image}
+                              fileInputRef={aiFactoryInsta4FileInputRef}
+                              title="GÖNDERİ 4"
+                              aspect="aspect-[4/5]"
+                              theme="retro"
+                              isLocked={isLocked}
+                              onLockedClick={() => handleLockedClick(aiFactoryInsta4FileInputRef)}
+                            />
+                          )}
+                        </motion.div>
+                      </AnimatePresence>
+
+                      {/* Horizontal Carousel Navigation Arrows */}
+                      <button
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          setAiFactoryInstaActiveIdx((prev) => (prev === 0 ? 3 : prev - 1));
+                        }}
+                        className="absolute left-3 top-1/2 -translate-y-1/2 w-8 h-8 rounded-full bg-black/70 border border-[#A86CFF]/30 flex items-center justify-center text-[#A86CFF] hover:text-white hover:bg-[#8F5BFF] transition-all z-20 shadow-[0_0_10px_rgba(168,108,255,0.4)]"
+                      >
+                        <ChevronLeft className="w-5 h-5" />
+                      </button>
+                      <button
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          setAiFactoryInstaActiveIdx((prev) => (prev === 3 ? 0 : prev + 1));
+                        }}
+                        className="absolute right-3 top-1/2 -translate-y-1/2 w-8 h-8 rounded-full bg-black/70 border border-[#A86CFF]/30 flex items-center justify-center text-[#A86CFF] hover:text-white hover:bg-[#8F5BFF] transition-all z-20 shadow-[0_0_10px_rgba(168,108,255,0.4)]"
+                      >
+                        <ChevronRight className="w-5 h-5" />
+                      </button>
+
+                      {/* Carousel Dots Indicator inside image at bottom */}
+                      <div className="absolute bottom-3 left-1/2 -translate-x-1/2 flex gap-1.5 z-20 bg-black/40 px-2.5 py-1 rounded-full border border-white/5">
+                        {[0, 1, 2, 3].map((idx) => (
+                          <div 
+                            key={idx}
+                            onClick={() => setAiFactoryInstaActiveIdx(idx)}
+                            className={`w-1.5 h-1.5 rounded-full cursor-pointer transition-all ${
+                              aiFactoryInstaActiveIdx === idx ? 'bg-[#C67CFF] scale-110 shadow-[0_0_6px_#A86CFF]' : 'bg-white/30 hover:bg-white/60'
+                            }`}
+                          />
+                        ))}
+                      </div>
+                    </div>
+
+                    {/* Instagram App Interaction Bar */}
+                    <div className="px-4 py-3 flex flex-col gap-2">
+                      <div className="flex items-center justify-between">
+                        <div className="flex items-center gap-3 text-white/80">
+                          <button className="hover:text-[#A86CFF] transition-colors">
+                            <Heart className="w-5 h-5" />
+                          </button>
+                          <button className="hover:text-[#A86CFF] transition-colors">
+                            <MessageCircle className="w-5 h-5" />
+                          </button>
+                          <button className="hover:text-[#A86CFF] transition-colors">
+                            <Send className="w-5 h-5" />
+                          </button>
+                        </div>
+                        <button className="text-white/80 hover:text-[#A86CFF] transition-colors">
+                          <Bookmark className="w-5 h-5" />
+                        </button>
+                      </div>
+
+                      {/* Likes, Caption, Comments */}
+                      <div className="space-y-1.5 text-left select-text">
+                        <span className="font-sans text-[11px] font-bold text-white block">1,256 beğenme</span>
+                        <div className="font-sans text-[11px] leading-relaxed">
+                          <span className="font-bold text-white mr-1.5">architecht</span>
+                          <span className="text-white/80 font-light">
+                            AI Agent Factory\'26 kapsamında hazırlanan bu paylaşım serisi; etkinliğin ironik 8-bit dünyasını, piksel karakterlerini ve yapay zekâ temasını sosyal medyada sürdürülebilir bir görsel dile dönüştürmek amacıyla tasarlandı.
+                          </span>
+                        </div>
+                        <span className="font-sans text-[9px] text-white/40 block uppercase tracking-wider mt-1">2 SAAT ÖNCE</span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </motion.div>
+
+              {renderRetroDivider()}
+
+              {/* Section 06: Sticker Seti */}
+              <motion.div 
+                initial={{ opacity: 0, y: 40, filter: 'blur(8px)' }}
+                whileInView={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
+                viewport={{ once: true, margin: "-120px" }}
+                transition={{ duration: 0.9, ease: [0.16, 1, 0.3, 1] }}
+                className="flex flex-col lg:flex-row items-stretch gap-8 lg:gap-16"
+              >
+                {/* Left: A5 placeholder */}
+                <div className="lg:w-7/12 flex justify-center items-center">
+                  <div className="w-[380px] max-w-full">
+                    <ImageUploadPlaceholder 
+                      image={aiFactoryStickerImage}
+                      onUpload={setAiFactoryStickerImage}
+                      fileInputRef={aiFactoryStickerFileInputRef}
+                      title="Sticker Seti Tasarımı"
+                      aspect="aspect-[1/1.414]"
+                      theme="retro"
+                      isLocked={isLocked}
+                      onLockedClick={() => handleLockedClick(aiFactoryStickerFileInputRef)}
+                    />
+                  </div>
+                </div>
+                
+                {/* Right: Description */}
+                <div className="lg:w-5/12 flex flex-col justify-center py-6">
+                  {renderRetroSectionHeader("06", "Sticker Seti")}
+                  <div className="space-y-4">
+                    <p className="font-sans text-sm sm:text-base text-white/70 leading-relaxed font-light">
+                      Robot kafası, dinozor, klasör ve piksel imleç gibi formları eğlenceli sticker setlerine dönüştürdüm.
+                    </p>
+                    <p className="font-sans text-sm sm:text-base text-white/70 leading-relaxed font-light">
+                      Katılımcıların bu görselleri etkinlik sonrasında da kullanmasını sağlayarak oyun evreninin yaşamaya devam etmesini amaçladım.
+                    </p>
+                  </div>
+                </div>
+              </motion.div>
+
+              {renderRetroDivider()}
+
+              {/* Section 07: Takım İsimliği */}
+              <motion.div 
+                initial={{ opacity: 0, y: 40, filter: 'blur(8px)' }}
+                whileInView={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
+                viewport={{ once: true, margin: "-120px" }}
+                transition={{ duration: 0.9, ease: [0.16, 1, 0.3, 1] }}
+                className="flex flex-col lg:flex-row items-stretch gap-8 lg:gap-16"
+              >
+                {/* Left: 16:9 placeholder with caption */}
+                <div className="lg:w-7/12 flex flex-col gap-3">
+                  <ImageUploadPlaceholder 
+                    image={aiFactoryBadgeImage}
+                    onUpload={setAiFactoryBadgeImage}
+                    fileInputRef={aiFactoryBadgeFileInputRef}
+                    title="Takım İsimliği Tasarımı"
+                    aspect="aspect-[16/9]"
+                    theme="retro"
+                    isLocked={isLocked}
+                    onLockedClick={() => handleLockedClick(aiFactoryBadgeFileInputRef)}
+                  />
+                  <span className="font-mono text-[9px] text-[#A86CFF]/40 text-center block">
+                    (Görsel AI ile modellenmiştir.)
+                  </span>
+                </div>
+                
+                {/* Right: Description */}
+                <div className="lg:w-5/12 flex flex-col justify-center py-6">
+                  {renderRetroSectionHeader("07", "Takım İsimliği")}
+                  <div className="space-y-4">
+                    <p className="font-sans text-sm sm:text-base text-white/70 leading-relaxed font-light">
+                      Yarışan ekipler için 3D yazıcı ile üretilmek üzere özel olarak modellediğim masa isimliği tasarımıdır.
+                    </p>
+                    <p className="font-sans text-sm sm:text-base text-white/70 leading-relaxed font-light">
+                      Üst katmanda takım adı, alt katmanda geliştirilen yapay zekâ ürünü yer alır.
+                    </p>
+                    <p className="font-sans text-sm sm:text-base text-white/70 leading-relaxed font-light">
+                      Lansmanın 8-bit estetiğini fiziksel bir objeye dönüştürmeyi amaçladım.
+                    </p>
+                  </div>
+                </div>
+              </motion.div>
+
+              {renderRetroDivider()}
+
+              {/* Section 08: Dino Ödülü */}
+              <motion.div 
+                initial={{ opacity: 0, y: 40, filter: 'blur(8px)' }}
+                whileInView={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
+                viewport={{ once: true, margin: "-120px" }}
+                transition={{ duration: 0.9, ease: [0.16, 1, 0.3, 1] }}
+                className="w-full bg-[#130f26]/40 border-2 border-[#A86CFF] rounded-2xl p-8 sm:p-12 shadow-[0_0_30px_rgba(168,108,255,0.15),inset_0_0_20px_rgba(168,108,255,0.05)] relative overflow-hidden group"
+              >
+                {/* Glowing grid line effects inside */}
+                <div className="absolute inset-0 bg-[linear-gradient(to_right,#ffffff01_1px,transparent_1px),linear-gradient(to_bottom,#ffffff01_1px,transparent_1px)] bg-[size:16px_16px] pointer-events-none" />
+                
+                {/* Retro corner glow marks */}
+                <div className="absolute top-2 left-2 w-2 h-2 bg-[#C67CFF] shadow-[0_0_8px_#C67CFF]" />
+                <div className="absolute top-2 right-2 w-2 h-2 bg-[#C67CFF] shadow-[0_0_8px_#C67CFF]" />
+                <div className="absolute bottom-2 left-2 w-2 h-2 bg-[#C67CFF] shadow-[0_0_8px_#C67CFF]" />
+                <div className="absolute bottom-2 right-2 w-2 h-2 bg-[#C67CFF] shadow-[0_0_8px_#C67CFF]" />
+                
+                <div className="flex flex-col items-center max-w-2xl mx-auto z-10 relative">
+                  {renderRetroSectionHeader("08", "Dino Ödülü")}
+                  
+                  {/* Center 260x360 placeholder */}
+                  <div className="w-[260px] max-w-full mb-8">
+                    <ImageUploadPlaceholder 
+                      image={aiFactoryTrophyImage}
+                      onUpload={setAiFactoryTrophyImage}
+                      fileInputRef={aiFactoryTrophyFileInputRef}
+                      title="Dino Ödülü Tasarımı"
+                      aspect="aspect-[13/18]"
+                      theme="retro"
+                      isLocked={isLocked}
+                      onLockedClick={() => handleLockedClick(aiFactoryTrophyFileInputRef)}
+                    />
+                  </div>
+                  
+                  {/* Below description */}
+                  <div className="text-center">
+                    <p className="font-sans text-sm sm:text-base text-white/80 leading-relaxed font-light mb-2">
+                      Konseptin merkezindeki "Yıkıcı Teknolojiler / İlkel Dinozor" ironisini fiziksel ödüle taşıdım.
+                    </p>
+                    <p className="font-sans text-sm sm:text-base text-white/80 leading-relaxed font-light">
+                      Kazananların havaya kaldıracağı bu ödülü piksel dinozor formunda tasarlayarak koleksiyon değeri taşıyan ikonik bir obje oluşturmayı amaçladım.
+                    </p>
+                  </div>
+                </div>
+              </motion.div>
+            </>
+          )}
+
+          {selectedProjectId === 'rd' && (
+            /* ==========================================
+               R&D SECTIONS
+               ========================================== */
+            <>
+              <motion.div 
+                initial={{ opacity: 0, y: 40, filter: 'blur(8px)' }}
+                whileInView={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
+                viewport={{ once: true, margin: "-120px" }}
+                transition={{ duration: 0.9, ease: [0.16, 1, 0.3, 1] }}
+                className="flex flex-col lg:flex-row items-stretch gap-8 lg:gap-16"
+              >
+                <div className="lg:w-5/12 flex flex-col justify-center py-6">
+                  <span className="font-mono text-[#00F0FF] text-[10px] tracking-[0.3em] font-bold uppercase mb-4 block">// 01 / ORGANİZASYONEL SÜREÇ AR&GE</span>
+                  <h2 className="font-display font-black text-4xl sm:text-5xl md:text-6xl text-white uppercase tracking-tighter leading-none mb-6">
+                    RESEARCH &<br/>
+                    <span className="text-[#00F0FF]">DEVELOPMENT</span>
+                  </h2>
+                  <p className="font-sans text-sm sm:text-base text-white/60 leading-relaxed font-light mb-6">
+                    Geleceğin organizasyonel süreçlerini ve veri akışlarını bilimsel yaklaşımlar ve teknik optimizasyonlarla şekillendiren araştırma ve geliştirme modelleri.
+                  </p>
+                  <div className="border-t border-white/5 pt-6 mt-2">
+                    <h4 className="font-mono text-[8px] tracking-widest text-[#00F0FF] uppercase mb-1.5">// SÜREÇ ENTEGRASYONLARI</h4>
+                    <p className="font-sans text-xs text-white/45 leading-relaxed font-light">
+                      Veri yollarını optimize etmek, ekipler arası iletişimi asimetrik şemalar yardımıyla en verimli hale getirmek için geliştirilmiş metodoloji şablonları.
+                    </p>
+                  </div>
+                </div>
+                <div className="lg:w-7/12 flex flex-col justify-center">
+                  <ImageUploadPlaceholder 
+                    image={rdImage}
+                    onUpload={setRdImage}
+                    fileInputRef={rdFileInputRef}
+                    title="R&D Araştırma Görseli"
+                    isLocked={isLocked}
+                    onLockedClick={() => handleLockedClick(rdFileInputRef)}
+                  />
+                </div>
+              </motion.div>
+            </>
+          )}
+
+          {selectedProjectId === 'egitim' && (
+            /* ==========================================
+               EĞİTİM SECTIONS (Architecht Academy Etkinlikleri)
+               ========================================== */
+            <div className="flex flex-col gap-24 md:gap-32 pb-20">
+              {/* Decorative Background Arrow Lines */}
+              <div className="absolute inset-0 pointer-events-none overflow-hidden select-none z-0">
+                {/* Arrow 1 */}
+                <div className="absolute right-[5%] top-[15%] opacity-15 text-[#FF4E00]">
+                  <svg width="240" height="120" viewBox="0 0 240 120" fill="none" stroke="currentColor" strokeWidth="1">
+                    <path d="M 0 60 L 200 60" />
+                    <path d="M 180 45 L 200 60 L 180 75" />
+                    <circle cx="10" cy="60" r="3" fill="currentColor" />
+                  </svg>
+                </div>
+                {/* Arrow 2 */}
+                <div className="absolute left-[8%] top-[45%] opacity-10 text-[#FF4E00]">
+                  <svg width="180" height="180" viewBox="0 0 100 100" fill="none" stroke="currentColor" strokeWidth="0.75">
+                    <path d="M 10 90 L 90 10" />
+                    <path d="M 60 10 L 90 10 L 90 40" />
+                    <path d="M 30 90 L 90 30" strokeDasharray="3 3" />
+                  </svg>
+                </div>
+                {/* Arrow 3 */}
+                <div className="absolute right-[10%] top-[70%] opacity-15 text-[#FF4E00]">
+                  <svg width="200" height="200" viewBox="0 0 100 100" fill="none" stroke="currentColor" strokeWidth="0.75">
+                    <path d="M 10 10 L 90 90" />
+                    <path d="M 90 60 L 90 90 L 60 90" />
+                  </svg>
+                </div>
+              </div>
+
+              {/* HERO */}
+              <motion.div 
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, margin: "-100px" }}
+                transition={{ duration: 0.8, ease: "easeOut" }}
+                className="flex flex-col lg:flex-row items-center gap-12 relative z-10"
+              >
+                <div className="lg:w-5/12 flex flex-col justify-center text-left">
+                  <div className="flex items-center gap-2 text-[#FF4E00] font-mono text-[9px] font-bold tracking-[0.3em] uppercase mb-4">
+                    <span>// OVERVIEW</span>
+                    <span className="w-1.5 h-1.5 rounded-full bg-[#FF4E00] animate-pulse" />
+                  </div>
+                  <h2 className="font-sans font-black text-3xl sm:text-4xl md:text-5xl text-white uppercase tracking-tighter leading-tight mb-6">
+                    HİÇ DURMAYAN<br/>
+                    ÖĞRENME <span className="text-[#FF4E00]">YOLCULUĞU</span>
+                  </h2>
+                  <p className="font-sans text-xs sm:text-sm text-white/60 leading-relaxed font-light mb-4">
+                    Akademinin kurumsal ciddiyetini simgeleyen derin lacivert ile gelişimin enerjisini temsil eden canlı turuncu zıtlığı üzerine bir dünya kurguladım.
+                  </p>
+                  <p className="font-sans text-xs sm:text-sm text-white/60 leading-relaxed font-light">
+                    "Hiç Durmayan Öğrenme Yolculuğu" mottosundan yola çıkarak, sürekli ilerlemeyi sembolize eden dinamik yön oklarını ana grafik ögem haline getirmeyi hedefledim.
+                  </p>
+                </div>
+                <div className="lg:w-7/12 w-full flex flex-col justify-center relative group">
+                  <ImageUploadPlaceholder 
+                    image={egitimThemeImage}
+                    onUpload={setEgitimThemeImage}
+                    fileInputRef={egitimThemeFileInputRef}
+                    title="ACADEMY HERO IMAGE"
+                    aspect="aspect-[16/9]"
+                    isLocked={isLocked}
+                    onLockedClick={() => handleLockedClick(egitimThemeFileInputRef)}
+                  />
+                </div>
+              </motion.div>
+
+              {/* SECTION 01 - Design Identity */}
+              <motion.div 
+                initial={{ opacity: 0, y: 40, filter: 'blur(8px)' }}
+                whileInView={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
+                viewport={{ once: true, margin: "-120px" }}
+                transition={{ duration: 0.9, ease: [0.16, 1, 0.3, 1] }}
+                className="flex flex-col lg:flex-row items-stretch gap-8 lg:gap-16 text-left relative z-10"
+              >
+                {/* LEFT */}
+                <div className="lg:w-5/12 flex flex-col justify-center py-6 relative">
+                  <div className="flex items-center gap-4 mb-6 select-none">
+                    <span className="font-serif italic font-extralight text-7xl sm:text-8xl text-[#FF4E00]/15 leading-none select-none">01</span>
+                    <div className="flex flex-col">
+                      <span className="font-mono text-[8.5px] text-[#FF4E00] tracking-[0.3em] font-bold uppercase mb-1">// ARCHITECHT ACADEMY</span>
+                      <h3 className="font-serif text-2xl sm:text-3xl text-white font-light tracking-tight flex items-center gap-2">
+                        Tasarım <span className="text-[#FF4E00] italic font-normal">Kimliği</span>
+                      </h3>
+                    </div>
+                  </div>
+
+                  <p className="font-sans text-sm sm:text-base text-white/60 leading-relaxed font-light mb-6">
+                    Kurumsal kimliği oluştururken güven hissini temsil eden koyu lacivert ile gelişimi simgeleyen canlı turuncuyu ana renk sistemi olarak kullandım. Tipografide modern geometrik fontları, el yazısı detaylarıyla dengeleyerek akademinin hem profesyonel hem de samimi karakterini yansıttım. Sürekli ilerlemeyi anlatan yön okları, tüm organizasyon boyunca tekrar eden temel grafik dili oluşturdu.
+                  </p>
+
+                  <div className="border-t border-white/5 pt-6 mt-2 flex flex-col gap-4">
+                    <div>
+                      <h4 className="font-mono text-[8px] tracking-widest text-white/35 uppercase mb-1">// TIPOGRAFİK FONT SEÇİMLERİ</h4>
+                      <p className="font-sans text-xs text-white/45 leading-relaxed font-light">
+                        Başlıklarda fütüristik <strong className="font-semibold text-white/80">Broilink</strong> ve <strong className="font-semibold text-white/80">Alternity</strong> fontları ile teknolojik duruşu vurgularken; el yazısı <strong className="font-semibold text-white/80">Caveat</strong> ve <strong className="font-semibold text-white/80">Dancing Script</strong> ile akademinin samimi yanını dengeledik.
+                      </p>
+                    </div>
+                  </div>
+                </div>
+
+                {/* RIGHT */}
+                <div className="lg:w-7/12 w-full flex flex-col justify-center">
+                  <ImageUploadPlaceholder 
+                    image={egitimTypographyImage}
+                    onUpload={setEgitimTypographyImage}
+                    fileInputRef={egitimTypographyFileInputRef}
+                    title="Tasarım Kimliği"
+                    aspect="aspect-[4/3]"
+                    customGraphic={renderEgitimIdentityGraphic()}
+                    isLocked={isLocked}
+                    onLockedClick={() => handleLockedClick(egitimTypographyFileInputRef)}
+                  />
+                </div>
+              </motion.div>
+
+              {/* SECTION 02 - Hediye Kit */}
+              <motion.div 
+                initial={{ opacity: 0, y: 40 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, margin: "-100px" }}
+                transition={{ duration: 0.8 }}
+                className="flex flex-col gap-8 relative z-10 text-left"
+              >
+                <div className="relative">
+                  {/* Giant Transparent Number */}
+                  <span className="absolute -left-4 -top-16 font-sans font-black text-[120px] md:text-[180px] text-white/[0.02] select-none leading-none pointer-events-none">
+                    02
+                  </span>
+                  
+                  <span className="font-mono text-[#FF4E00] text-[9px] tracking-[0.3em] font-bold uppercase mb-3 block relative z-10">
+                    // ARCHITECHT ACADEMY
+                  </span>
+                  <h2 className="font-sans font-black text-3xl md:text-4xl text-white uppercase tracking-tight relative z-10">
+                    Hediye Kit
+                  </h2>
+                </div>
+
+                {/* Colored Keyword List */}
+                <div className="flex flex-wrap items-center gap-x-4 gap-y-2 py-2 border-y border-white/5 font-mono text-[9px] tracking-widest uppercase text-[#FF4E00] font-bold">
+                  <span>Turuncu</span>
+                  <span className="text-white/20">•</span>
+                  <span>Bez Çanta</span>
+                  <span className="text-white/20">•</span>
+                  <span>İsimli Kupa</span>
+                  <span className="text-white/20">•</span>
+                  <span>3D Yazıcı Plaket</span>
+                  <span className="text-white/20">•</span>
+                  <span>Sticker Seti</span>
+                  <span className="text-white/20">•</span>
+                  <span>Ayraç</span>
+                </div>
+
+                {/* Description */}
+                <p className="font-sans text-xs sm:text-sm text-white/60 leading-relaxed font-light max-w-4xl">
+                  Eğitmenler ve katılımcılar için tasarladığımız bu kurumsal kitte (bez çanta, isimli kupa, plaket, sticker seti ve ayraç); lacivert ile turuncu dengesini ürünlerin en küçük detayına kadar taşıdım. Amacım akademi içi aidiyet duygusunu güçlendirecek bütünsel bir karşılama paketi (welcome pack) oluşturmaktı.
+                </p>
+
+                {/* 3 side-by-side squares */}
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mt-4">
+                  <div className="flex flex-col gap-3">
+                    <ImageUploadPlaceholder 
+                      image={egitimKit1Image}
+                      onUpload={setEgitimKit1Image}
+                      fileInputRef={egitimKit1FileInputRef}
+                      title="Bez Çanta & Kupa"
+                      aspect="aspect-square"
+                      isLocked={isLocked}
+                      onLockedClick={() => handleLockedClick(egitimKit1FileInputRef)}
+                    />
+                    <span className="font-mono text-[8px] text-white/30 uppercase tracking-widest text-center">// 1. REFERANS GÖRSELİ (320x320)</span>
+                  </div>
+                  <div className="flex flex-col gap-3">
+                    <ImageUploadPlaceholder 
+                      image={egitimKit2Image}
+                      onUpload={setEgitimKit2Image}
+                      fileInputRef={egitimKit2FileInputRef}
+                      title="3D Plaket & Sticker"
+                      aspect="aspect-square"
+                      isLocked={isLocked}
+                      onLockedClick={() => handleLockedClick(egitimKit2FileInputRef)}
+                    />
+                    <span className="font-mono text-[8px] text-white/30 uppercase tracking-widest text-center">// 2. REFERANS GÖRSELİ (320x320)</span>
+                  </div>
+                  <div className="flex flex-col gap-3">
+                    <ImageUploadPlaceholder 
+                      image={egitimKit3Image}
+                      onUpload={setEgitimKit3Image}
+                      fileInputRef={egitimKit3FileInputRef}
+                      title="Ayraç & Detaylar"
+                      aspect="aspect-square"
+                      isLocked={isLocked}
+                      onLockedClick={() => handleLockedClick(egitimKit3FileInputRef)}
+                    />
+                    <span className="font-mono text-[8px] text-white/30 uppercase tracking-widest text-center">// 3. REFERANS GÖRSELİ (320x320)</span>
+                  </div>
+                </div>
+              </motion.div>
+
+              {/* SECTION 03 - Pleksi & Yönlendirmeler */}
+              <motion.div 
+                initial={{ opacity: 0, y: 40 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, margin: "-100px" }}
+                transition={{ duration: 0.8 }}
+                className="flex flex-col gap-8 relative z-10 text-left"
+              >
+                <div className="relative">
+                  {/* Giant Transparent Number */}
+                  <span className="absolute -left-4 -top-16 font-sans font-black text-[120px] md:text-[180px] text-white/[0.02] select-none leading-none pointer-events-none">
+                    03
+                  </span>
+                  
+                  <span className="font-mono text-[#FF4E00] text-[9px] tracking-[0.3em] font-bold uppercase mb-3 block relative z-10">
+                    // ARCHITECHT ACADEMY
+                  </span>
+                  <h2 className="font-sans font-black text-3xl md:text-4xl text-white uppercase tracking-tight relative z-10">
+                    Pleksi & Yönlendirmeler
+                  </h2>
+                </div>
+
+                <div className="flex flex-col lg:flex-row items-stretch gap-10">
+                  <div className="lg:w-4/12 flex flex-col justify-center bg-[#FF4E00]/[0.01] border border-white/5 rounded-2xl p-6 sm:p-8">
+                    <p className="font-sans text-xs sm:text-sm text-white/60 leading-relaxed font-light">
+                      Eğitim alanında mekanı düz tabelalarla boğmak yerine, akademinin renk geçişlerini taşıyan bu panolar sayesinde yön bulma deneyimini estetik bir organizasyon diline dönüştürmeyi amaçladım.
+                    </p>
+                  </div>
+                  
+                  <div className="lg:w-8/12 grid grid-cols-1 sm:grid-cols-3 gap-6">
+                    <div className="flex flex-col gap-2">
+                      <ImageUploadPlaceholder 
+                        image={egitimPleksi1Image}
+                        onUpload={setEgitimPleksi1Image}
+                        fileInputRef={egitimPleksi1FileInputRef}
+                        title="Pleksi 01"
+                        aspect="aspect-[210/297]"
+                        isLocked={isLocked}
+                        onLockedClick={() => handleLockedClick(egitimPleksi1FileInputRef)}
+                      />
+                      <span className="font-mono text-[8px] text-white/30 uppercase tracking-widest text-center">// A4 ORANI</span>
+                    </div>
+                    <div className="flex flex-col gap-2">
+                      <ImageUploadPlaceholder 
+                        image={egitimPleksi2Image}
+                        onUpload={setEgitimPleksi2Image}
+                        fileInputRef={egitimPleksi2FileInputRef}
+                        title="Pleksi 02"
+                        aspect="aspect-[210/297]"
+                        isLocked={isLocked}
+                        onLockedClick={() => handleLockedClick(egitimPleksi2FileInputRef)}
+                      />
+                      <span className="font-mono text-[8px] text-white/30 uppercase tracking-widest text-center">// A4 ORANI</span>
+                    </div>
+                    <div className="flex flex-col gap-2">
+                      <ImageUploadPlaceholder 
+                        image={egitimPleksi3Image}
+                        onUpload={setEgitimPleksi3Image}
+                        fileInputRef={egitimPleksi3FileInputRef}
+                        title="Pleksi 03"
+                        aspect="aspect-[210/297]"
+                        isLocked={isLocked}
+                        onLockedClick={() => handleLockedClick(egitimPleksi3FileInputRef)}
+                      />
+                      <span className="font-mono text-[8px] text-white/30 uppercase tracking-widest text-center">// A4 ORANI</span>
+                    </div>
+                  </div>
+                </div>
+              </motion.div>
+
+              {/* SECTION 04 - El Pankartları */}
+              <motion.div 
+                initial={{ opacity: 0, y: 40 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, margin: "-100px" }}
+                transition={{ duration: 0.8 }}
+                className="flex flex-col gap-8 relative z-10 text-left"
+              >
+                <div className="relative">
+                  {/* Giant Transparent Number */}
+                  <span className="absolute -left-4 -top-16 font-sans font-black text-[120px] md:text-[180px] text-white/[0.02] select-none leading-none pointer-events-none">
+                    04
+                  </span>
+                  
+                  <span className="font-mono text-[#FF4E00] text-[9px] tracking-[0.3em] font-bold uppercase mb-3 block relative z-10">
+                    // ARCHITECHT ACADEMY
+                  </span>
+                  <h2 className="font-sans font-black text-3xl md:text-4xl text-white uppercase tracking-tight relative z-10">
+                    El Pankartları
+                  </h2>
+                </div>
+
+                <p className="font-sans text-xs sm:text-sm text-white/60 leading-relaxed font-light max-w-4xl">
+                  Eğitim aralarında ve fotoğraf alanlarında katılımcıların motivasyonunu artırmak için "Grow Your Mind" gibi akademi mottolarını taşıyan dairesel el pankartları tasarladım. Bu küçük objelerle kurumsal ciddiyeti eğlenceli bir etkileşimle dengelemeyi hedefledim.
+                </p>
+
+                {/* Carousel */}
+                <div className="w-full flex justify-center mt-6">
+                  {/* Interactive Carousel */}
+                  <div className="flex flex-col items-center gap-8 w-full max-w-4xl">
+                    {/* Carousel Display */}
+                    <div className="flex items-center justify-center gap-4 sm:gap-8 md:gap-12 py-16 sm:py-24 w-full">
+                      {[
+                        { id: 1, img: egitimPankart1Image, setImg: setEgitimPankart1Image, ref: egitimPankart1FileInputRef, title: "Grow Your Mind" },
+                        { id: 2, img: egitimPankart2Image, setImg: setEgitimPankart2Image, ref: egitimPankart2FileInputRef, title: "Hiç Durma Öğren" },
+                        { id: 3, img: egitimPankart3Image, setImg: setEgitimPankart3Image, ref: egitimPankart3FileInputRef, title: "Think Different" },
+                        { id: 4, img: egitimPankart4Image, setImg: setEgitimPankart4Image, ref: egitimPankart4FileInputRef, title: "Academy Spirit" }
+                      ].map((item, idx) => {
+                        const isActive = idx === egitimPankartActiveIdx;
+                        return (
+                          <motion.div
+                            key={item.id}
+                            animate={{
+                              scale: isActive ? 1.45 : 0.85,
+                              opacity: isActive ? 1 : 0.4,
+                              zIndex: isActive ? 20 : 10
+                            }}
+                            transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
+                            className={`relative w-36 h-36 sm:w-56 sm:h-56 md:w-80 md:h-80 rounded-full border-2 ${
+                              isActive ? 'border-[#FF4E00] shadow-[0_0_45px_rgba(255,78,0,0.45)]' : 'border-white/10'
+                            } bg-white/[0.01] overflow-hidden flex-shrink-0 flex items-center justify-center transition-colors duration-500`}
+                          >
+                            {/* Custom circular file upload inside */}
+                            <input
+                              type="file"
+                              ref={item.ref}
+                              accept="image/*"
+                              className="hidden"
+                              onChange={(e) => {
+                                  if (e.target.files && e.target.files[0]) {
+                                    const file = e.target.files[0];
+                                    compressAndResizeImage(file, 1024, 1024, 0.9)
+                                      .then(compressedUrl => item.setImg(compressedUrl))
+                                      .catch(() => {
+                                        const reader = new FileReader();
+                                        reader.onloadend = () => {
+                                          if (typeof reader.result === 'string') {
+                                            item.setImg(reader.result);
+                                          }
+                                        };
+                                        reader.readAsDataURL(file);
+                                      });
+                                  }
+                              }}
+                            />
+                            
+                            {item.img ? (
+                              <div 
+                                onClick={isLocked ? undefined : () => item.ref.current?.click()} 
+                                className={`absolute inset-0 w-full h-full ${isLocked ? 'cursor-default' : 'cursor-pointer'} group/sign`}
+                              >
+                                <img src={item.img} alt={item.title} className="w-full h-full object-cover transition-transform duration-500 group-hover/sign:scale-105" referrerPolicy="no-referrer" />
+                                {!isLocked && (
+                                  <div className="absolute inset-0 bg-black/50 opacity-0 group-hover/sign:opacity-100 flex flex-col items-center justify-center gap-1 transition-opacity z-20">
+                                    <Upload className="w-5 h-5 sm:w-6 sm:h-6 text-[#FF4E00] animate-pulse" />
+                                    <span className="font-mono text-[8px] sm:text-[10px] text-[#FF4E00] tracking-wider uppercase font-bold">// DEĞİŞTİR</span>
+                                  </div>
+                                )}
+                              </div>
+                            ) : (
+                              <div 
+                                onClick={isLocked ? undefined : () => item.ref.current?.click()} 
+                                className={`flex flex-col items-center justify-center gap-1.5 ${isLocked ? 'cursor-default' : 'cursor-pointer'} p-4 text-center select-none`}
+                              >
+                                {!isLocked && (
+                                  <div className="w-8 h-8 sm:w-12 sm:h-12 rounded-full bg-[#FF4E00]/10 border border-[#FF4E00]/30 flex items-center justify-center text-[#FF4E00] mb-1">
+                                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                                      <path d="M12 5v14M5 12h14" />
+                                    </svg>
+                                  </div>
+                                )}
+                                <span className="font-mono text-[8px] sm:text-[10px] md:text-[12px] text-[#FF4E00] tracking-wider uppercase font-bold leading-tight truncate max-w-[80px] sm:max-w-[130px]">{item.title}</span>
+                                {!isLocked && <span className="font-sans text-[7px] sm:text-[9px] text-white/30 leading-tight hidden sm:inline">Yükle</span>}
+                              </div>
+                            )}
+                          </motion.div>
+                        );
+                      })}
+                    </div>
+
+                    {/* Carousel Controls */}
+                    <div className="flex items-center gap-4">
+                      <button
+                        onClick={() => setEgitimPankartActiveIdx(prev => (prev - 1 + 4) % 4)}
+                        className="p-3 bg-white/5 hover:bg-[#FF4E00]/10 border border-white/10 hover:border-[#FF4E00]/40 rounded-full text-white hover:text-[#FF4E00] transition-all duration-300 shadow-md group cursor-pointer"
+                      >
+                        <ChevronLeft className="w-5 h-5 group-hover:-translate-x-0.5 transition-transform" />
+                      </button>
+                      <div className="flex items-center gap-2">
+                        {[0, 1, 2, 3].map(i => (
+                          <button
+                            key={i}
+                            onClick={() => setEgitimPankartActiveIdx(i)}
+                            className={`w-2 h-2 rounded-full transition-all duration-300 cursor-pointer ${
+                              i === egitimPankartActiveIdx ? 'bg-[#FF4E00] w-6' : 'bg-white/20 hover:bg-white/40'
+                            }`}
+                          />
+                        ))}
+                      </div>
+                      <button
+                        onClick={() => setEgitimPankartActiveIdx(prev => (prev + 1) % 4)}
+                        className="p-3 bg-white/5 hover:bg-[#FF4E00]/10 border border-white/10 hover:border-[#FF4E00]/40 rounded-full text-white hover:text-[#FF4E00] transition-all duration-300 shadow-md group cursor-pointer"
+                      >
+                        <ChevronRight className="w-5 h-5 group-hover:translate-x-0.5 transition-transform" />
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </motion.div>
+
+              {/* SECTION 05 - Kişiselleştirilmiş Yaka Kartları */}
+              <motion.div 
+                initial={{ opacity: 0, y: 40 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, margin: "-100px" }}
+                transition={{ duration: 0.8 }}
+                className="flex flex-col gap-8 relative z-10 text-left"
+              >
+                <div className="relative">
+                  {/* Giant Transparent Number */}
+                  <span className="absolute -left-4 -top-16 font-sans font-black text-[120px] md:text-[180px] text-white/[0.02] select-none leading-none pointer-events-none">
+                    05
+                  </span>
+                  
+                  <span className="font-mono text-[#FF4E00] text-[9px] tracking-[0.3em] font-bold uppercase mb-3 block relative z-10">
+                    // ARCHITECHT ACADEMY
+                  </span>
+                  <h2 className="font-sans font-black text-3xl md:text-4xl text-white uppercase tracking-tight relative z-10">
+                    Kişiselleştirilmiş Yaka Kartları
+                  </h2>
+                </div>
+
+                <div className="flex flex-col lg:flex-row items-center gap-12 mt-4">
+                  {/* Flip Interaction Placeholder */}
+                  <div className="lg:w-6/12 flex flex-col items-center justify-center gap-6 w-full">
+                    <div 
+                      onClick={() => setEgitimYakaFlipped(!egitimYakaFlipped)} 
+                      className="relative cursor-pointer group select-none flex items-center justify-center"
+                      style={{ perspective: '1000px', width: '240px', height: '360px' }}
+                    >
+                      <motion.div
+                        animate={{ rotateY: egitimYakaFlipped ? 180 : 0 }}
+                        transition={{ duration: 0.6, ease: "easeOut" }}
+                        className="w-full h-full relative"
+                        style={{ transformStyle: 'preserve-3d' }}
+                      >
+                        {/* FRONT SIDE */}
+                        <div 
+                          className="absolute inset-0 w-full h-full rounded-2xl overflow-hidden border border-white/10 bg-white/[0.01]"
+                          style={{ backfaceVisibility: 'hidden' }}
+                        >
+                          <ImageUploadPlaceholder
+                            image={egitimYakaFrontImage}
+                            onUpload={setEgitimYakaFrontImage}
+                            fileInputRef={egitimYakaFrontFileInputRef}
+                            title="Yaka Kartı Ön"
+                            aspect="aspect-[240/360]"
+                            isLocked={isLocked}
+                            onLockedClick={() => handleLockedClick(egitimYakaFrontFileInputRef)}
+                          />
+                          <div className="absolute bottom-2 left-1/2 -translate-x-1/2 z-30 bg-black/60 backdrop-blur-md px-3 py-1 rounded-full text-[8px] font-mono tracking-widest text-[#FF4E00] uppercase border border-white/5 flex items-center gap-1 select-none font-bold">
+                            ÖN GÖRÜNÜM <span>⇅</span>
+                          </div>
+                        </div>
+
+                        {/* BACK SIDE */}
+                        <div 
+                          className="absolute inset-0 w-full h-full rounded-2xl overflow-hidden border border-white/10 bg-white/[0.01]"
+                          style={{ backfaceVisibility: 'hidden', transform: 'rotateY(180deg)' }}
+                        >
+                          <ImageUploadPlaceholder
+                            image={egitimYakaBackImage}
+                            onUpload={setEgitimYakaBackImage}
+                            fileInputRef={egitimYakaBackFileInputRef}
+                            title="Yaka Kartı Arka"
+                            aspect="aspect-[240/360]"
+                            isLocked={isLocked}
+                            onLockedClick={() => handleLockedClick(egitimYakaBackFileInputRef)}
+                          />
+                          <div className="absolute bottom-2 left-1/2 -translate-x-1/2 z-30 bg-black/60 backdrop-blur-md px-3 py-1 rounded-full text-[8px] font-mono tracking-widest text-[#FF4E00] uppercase border border-white/5 flex items-center gap-1 select-none font-bold">
+                            ARKA GÖRÜNÜM <span>⇅</span>
+                          </div>
+                        </div>
+                      </motion.div>
+                    </div>
+                    
+                    <button
+                      onClick={() => setEgitimYakaFlipped(!egitimYakaFlipped)}
+                      className="font-mono text-[10px] tracking-widest text-[#FF4E00] border border-[#FF4E00]/30 hover:bg-[#FF4E00]/10 px-5 py-2 rounded-xl transition-all uppercase font-bold cursor-pointer hover:shadow-[0_0_15px_rgba(255,78,0,0.2)]"
+                    >
+                      KARTI ÇEVİR (3D FLIP)
+                    </button>
+                  </div>
+
+                  {/* Description text */}
+                  <div className="lg:w-6/12 flex flex-col justify-center">
+                    <p className="font-sans text-xs sm:text-sm text-white/60 leading-relaxed font-light mb-4">
+                      Katılımcıların kendilerini akademinin vizyoner bir parçası olarak hissetmeleri için kişiselleştirilmiş yaka kartları tasarladım.
+                    </p>
+                    <p className="font-sans text-xs sm:text-sm text-white/60 leading-relaxed font-light">
+                      Yapay zekâ ile oluşturulan özgün avatar görselleri sayesinde bu kartları sıradan kimliklerden çıkarıp saklanmak istenecek kişisel birer hatıraya dönüştürmeyi amaçladım.
+                    </p>
+                  </div>
+                </div>
+              </motion.div>
+
+              <div className="w-full h-[1px] bg-white/5 my-12" />
+
+              {/* SECTION 06 - Veri-Nimet Yaka Kartı */}
+              <motion.div 
+                initial={{ opacity: 0, y: 40 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, margin: "-100px" }}
+                transition={{ duration: 0.8 }}
+                className="flex flex-col gap-8 relative z-10 text-left"
+              >
+                <div className="relative">
+                  {/* Giant Transparent Number */}
+                  <span className="absolute -left-4 -top-16 font-sans font-black text-[120px] md:text-[180px] text-white/[0.02] select-none leading-none pointer-events-none">
+                    06
+                  </span>
+                  
+                  <span className="font-mono text-[#FF4E00] text-[9px] tracking-[0.3em] font-bold uppercase mb-3 block relative z-10">
+                    // ARCHITECHT ACADEMY
+                  </span>
+                  <h2 className="font-sans font-black text-3xl md:text-4xl text-white uppercase tracking-tight relative z-10">
+                    Veri-Nimet Yaka Kartı
+                  </h2>
+                </div>
+
+                <div className="flex flex-col lg:flex-row items-center gap-12 mt-4">
+                  {/* LEFT: Image Placeholder (400x255 landscape) */}
+                  <div className="lg:w-6/12 w-full">
+                    <div className="w-full max-w-[400px]">
+                      <ImageUploadPlaceholder
+                        image={egitimVeriNimetImage}
+                        onUpload={setEgitimVeriNimetImage}
+                        fileInputRef={egitimVeriNimetFileInputRef}
+                        title="Veri-Nimet Yaka Kartı"
+                        aspect="aspect-[400/255]"
+                        isLocked={isLocked}
+                        onLockedClick={() => handleLockedClick(egitimVeriNimetFileInputRef)}
+                      />
+                    </div>
+                  </div>
+
+                  {/* RIGHT: Description */}
+                  <div className="lg:w-6/12 flex flex-col justify-center">
+                    <p className="font-sans text-xs sm:text-sm text-white/60 leading-relaxed font-light mb-4">
+                      Eğitim programı kapsamında, katılımcıların veriye dayalı analitik düşünce ile insan odaklı bereketi ("nimet" felsefesini) bir arada kurgulayabilmeleri adına tasarladığım özgün bir yaka kartı deneyimi.
+                    </p>
+                    <p className="font-sans text-xs sm:text-sm text-white/60 leading-relaxed font-light">
+                      Veri yollarını, fütüristik kodlama estetiğini ve canlandırıcı turuncu-mavi renk şemasını kartın görsel kompozisyonunun merkezine taşıyarak; eğitimi bir bilgi aktarımından öte bütüncül bir kurumsal kültür deneyimi olarak konumlandırmayı hedefledim.
+                    </p>
+                  </div>
+                </div>
+              </motion.div>
+            </div>
+          )}
+
+          {selectedProjectId === 'rd-techathon-2026' && (
+            /* ==========================================
+               R&D TECHATHON 2026 SECTIONS
+               ========================================== */
+            <>
+              {/* SECTION 01: Tasarım Kimliği */}
+              <motion.div 
+                initial={{ opacity: 0, y: 40, filter: 'blur(8px)' }}
+                whileInView={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
+                viewport={{ once: true, margin: "-120px" }}
+                transition={{ duration: 0.9, ease: [0.16, 1, 0.3, 1] }}
+                className="flex flex-col lg:flex-row items-center gap-8 lg:gap-16 relative"
+              >
+                {/* Subtle glowing nested triangle outlines background */}
+                {renderNestedTrianglesBackground('#00F0FF')}
+
+                <div className="lg:w-5/12 flex flex-col justify-center py-6 relative z-10">
+                  <div className="flex items-center gap-4 mb-6 select-none">
+                    <span className="font-sans font-black text-7xl sm:text-8xl text-[#00F0FF]/15 leading-none select-none">01</span>
+                    <div className="flex flex-col">
+                      <span className="font-mono text-[8.5px] text-[#00F0FF] tracking-[0.3em] font-bold uppercase mb-1">// R&D TECHATHON 2026</span>
+                      <h3 className="font-sans font-black text-2xl sm:text-3xl text-white uppercase tracking-tight flex items-center gap-2">
+                        <span className="text-[#00F0FF] font-mono mr-1">//</span> Tasarım Kimliği
+                      </h3>
+                    </div>
+                  </div>
+                  <p className="font-sans text-sm sm:text-base text-white/60 leading-relaxed font-light mb-6">
+                    Etkinliğin ana mottosu olan <strong className="font-semibold text-white/90">"Turning Ideas Into Impact"</strong> vizyonunu; yapay zekanın gücü ve takım çalışmasının dinamizmiyle birleştiren fütüristik bir görsel dil üzerine inşa ettik. Derin elektrik mavisi ve siber mor tonlarını, inovasyonun enerjisini temsil eden canlı turuncu ve neon piksellerle harmanlayarak, AR-GE ruhuna yakışır, teknolojik ve yüksek motivasyon barındıran bir kimlik kurguladık.
+                  </p>
+                </div>
+                <div className="lg:w-7/12 relative z-10 w-full">
+                  <ImageUploadPlaceholder 
+                    image={rdSection1Image}
+                    onUpload={setRdSection1Image}
+                    fileInputRef={rdSection1FileInputRef}
+                    title="Tasarım Kimliği"
+                    aspect="aspect-[600/740]"
+                    objectFit="contain"
+                    isLocked={isLocked}
+                    onLockedClick={() => handleLockedClick(rdSection1FileInputRef)}
+                  />
+                </div>
+              </motion.div>
+
+              {renderNeonDivider('#00F0FF')}
+
+              {/* SECTION 02: Kişiselleştirilmiş Yaka Kartı */}
+              <motion.div 
+                initial={{ opacity: 0, y: 40, filter: 'blur(8px)' }}
+                whileInView={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
+                viewport={{ once: true, margin: "-120px" }}
+                transition={{ duration: 0.9, ease: [0.16, 1, 0.3, 1] }}
+                className="flex flex-col lg:flex-row-reverse items-center gap-8 lg:gap-16 relative"
+              >
+                {/* Subtle glowing nested triangle outlines background */}
+                {renderNestedTrianglesBackground('#FF6B00')}
+
+                <div className="lg:w-5/12 flex flex-col justify-center py-6 relative z-10">
+                  <div className="flex items-center gap-4 mb-6 select-none">
+                    <span className="font-sans font-black text-7xl sm:text-8xl text-[#00F0FF]/15 leading-none select-none">02</span>
+                    <div className="flex flex-col">
+                      <span className="font-mono text-[8.5px] text-[#00F0FF] tracking-[0.3em] font-bold uppercase mb-1">// R&D TECHATHON 2026</span>
+                      <h3 className="font-sans font-black text-2xl sm:text-3xl text-white uppercase tracking-tight flex items-center gap-2">
+                        <span className="text-[#00F0FF] font-mono mr-1">//</span> Kişiselleştirilmiş Yaka Kartı
+                      </h3>
+                    </div>
+                  </div>
+                  <p className="font-sans text-sm sm:text-base text-white/60 leading-relaxed font-light mb-6">
+                    Lansmanın teknoloji odaklı ruhunu katılımcılara hissettirmek adına, canlı renk geçişleri ve geometrik hatlara sahip yaka kartları tasarladım. Kartların üzerinde katılımcıların yapay zeka ile dönüştürülmüş özgün avatar görsellerine yer vererek, kimlik tasarımını standart birer yaka kartı olmaktan çıkarıp etkinliğin teknolojik konseptiyle doğrudan bütünleşen kişisel birer hatıraya dönüştürmeyi amaçladım.
+                  </p>
+
+                  {/* Slide controls for front/back yaka karti */}
+                  <div className="flex items-center gap-4 mt-4 select-none">
+                    <button 
+                      onClick={() => setYakaKartiSide('front')}
+                      className={`font-mono text-[9px] font-bold tracking-widest uppercase py-2.5 px-5 rounded-xl border transition-all duration-300 ${
+                        yakaKartiSide === 'front' 
+                          ? 'border-[#00F0FF] text-[#00F0FF] bg-[#00F0FF]/10 shadow-[0_0_15px_rgba(0,240,255,0.15)]' 
+                          : 'border-white/10 text-white/40 hover:text-white/85 hover:border-white/20'
+                      }`}
+                    >
+                      Ön Yüz (Front)
+                    </button>
+                    <button 
+                      onClick={() => setYakaKartiSide('back')}
+                      className={`font-mono text-[9px] font-bold tracking-widest uppercase py-2.5 px-5 rounded-xl border transition-all duration-300 ${
+                        yakaKartiSide === 'back' 
+                          ? 'border-[#00F0FF] text-[#00F0FF] bg-[#00F0FF]/10 shadow-[0_0_15px_rgba(0,240,255,0.15)]' 
+                          : 'border-white/10 text-white/40 hover:text-white/85 hover:border-white/20'
+                      }`}
+                    >
+                      Arka Yüz (Back)
+                    </button>
+                  </div>
+                </div>
+
+                <div className="lg:w-7/12 flex flex-col items-center justify-center relative z-10 w-full">
+                  <div className="w-full max-w-[340px] aspect-[153/218] relative">
+                    <ImageUploadPlaceholder 
+                      image={yakaKartiSide === 'front' ? rdYakaKartiFrontImage : rdYakaKartiBackImage}
+                      onUpload={yakaKartiSide === 'front' ? setRdYakaKartiFrontImage : setRdYakaKartiBackImage}
+                      fileInputRef={yakaKartiSide === 'front' ? rdYakaKartiFrontFileInputRef : rdYakaKartiBackFileInputRef}
+                      title={`Yaka Kartı ${yakaKartiSide === 'front' ? 'Ön' : 'Arka'}`}
+                      aspect="aspect-[153/218]"
+                      objectFit="contain"
+                      isLocked={isLocked}
+                      onLockedClick={() => handleLockedClick(yakaKartiSide === 'front' ? rdYakaKartiFrontFileInputRef : rdYakaKartiBackFileInputRef)}
+                    />
+                  </div>
+                </div>
+              </motion.div>
+
+              {renderNeonDivider('#00F0FF')}
+
+              {/* SECTION 03: Yarışmacı Videoları */}
+              <motion.div 
+                initial={{ opacity: 0, y: 40, filter: 'blur(8px)' }}
+                whileInView={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
+                viewport={{ once: true, margin: "-120px" }}
+                transition={{ duration: 0.9, ease: [0.16, 1, 0.3, 1] }}
+                className="flex flex-col lg:flex-row items-center gap-8 lg:gap-16 relative"
+              >
+                {/* Subtle glowing nested triangle outlines background */}
+                {renderNestedTrianglesBackground('#00F0FF')}
+
+                <div className="lg:w-5/12 flex flex-col justify-center py-6 relative z-10">
+                  <div className="flex items-center gap-4 mb-6 select-none">
+                    <span className="font-sans font-black text-7xl sm:text-8xl text-[#00F0FF]/15 leading-none select-none">03</span>
+                    <div className="flex flex-col">
+                      <span className="font-mono text-[8.5px] text-[#00F0FF] tracking-[0.3em] font-bold uppercase mb-1">// R&D TECHATHON 2026</span>
+                      <h3 className="font-sans font-black text-2xl sm:text-3xl text-white uppercase tracking-tight flex items-center gap-2">
+                        <span className="text-[#00F0FF] font-mono mr-1">//</span> Yarışmacı Videoları
+                      </h3>
+                    </div>
+                  </div>
+                  <p className="font-sans text-sm sm:text-base text-white/60 leading-relaxed font-light mb-6">
+                    Yarışmacı ekipler için hazırlanan yapay zeka destekli tanıtım videoları, projenin hikayesini kısa sürede etkili biçimde aktarırken etkinliğin dijital atmosferini güçlendiren dinamik içerikler olarak tasarlandı.
+                  </p>
+                </div>
+
+                <div className="lg:w-7/12 relative z-10 w-full">
+                  <div className="w-full aspect-[16/9] rounded-2xl border border-white/5 bg-white/[0.015] overflow-hidden group relative flex flex-col items-center justify-center">
+                    <input 
+                      type="file" 
+                      ref={rdVideoFileInputRef} 
+                      onChange={(e) => {
+                        if (e.target.files && e.target.files[0]) {
+                          const file = e.target.files[0];
+                          const reader = new FileReader();
+                          reader.onloadend = () => {
+                            if (typeof reader.result === 'string') {
+                              setRdVideoUrl(reader.result);
+                            }
+                          };
+                          reader.readAsDataURL(file);
+                        }
+                      }} 
+                      accept="video/*" 
+                      className="hidden" 
+                    />
+                    
+                    {rdVideoUrl ? (
+                      <div className="w-full h-full relative">
+                        <video 
+                          src={rdVideoUrl} 
+                          controls 
+                          className="w-full h-full object-cover rounded-2xl" 
+                        />
+                        {!isLocked && (
+                          <div 
+                            onClick={() => rdVideoFileInputRef.current?.click()}
+                            className="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 backdrop-blur-[2px] transition-all duration-300 z-20 flex flex-col items-center justify-center gap-3 cursor-pointer"
+                          >
+                            <div className="w-12 h-12 rounded-full border border-[#00F0FF]/40 bg-[#00F0FF]/5 flex items-center justify-center text-[#00F0FF] shadow-[0_0_15px_rgba(0,240,255,0.35)]">
+                              <Upload className="w-4 h-4" />
+                            </div>
+                            <span className="font-mono text-[9px] text-[#00F0FF] tracking-[0.3em] font-bold uppercase">// VİDEOYU DEĞİŞTİR</span>
+                          </div>
+                        )}
+                      </div>
+                    ) : (
+                      <div 
+                        onClick={() => !isLocked && rdVideoFileInputRef.current?.click()}
+                        className={`w-full h-full flex flex-col items-center justify-center gap-4 p-8 text-center cursor-pointer hover:bg-white/[0.03] transition-all duration-300`}
+                      >
+                        <div className="w-16 h-16 rounded-full border border-[#00F0FF]/25 bg-[#00F0FF]/5 flex items-center justify-center text-[#00F0FF] shadow-[0_0_20px_rgba(0,240,255,0.15)]">
+                          <Play className="w-6 h-6 ml-1" />
+                        </div>
+                        <div>
+                          <h4 className="font-sans font-bold text-sm text-white/90">Yarışmacı Tanıtım Videosu</h4>
+                          <p className="font-sans text-xs text-white/45 mt-1 max-w-xs mx-auto">Tıklayarak video yükleyin (16:9 oran, mp4 formatı önerilir)</p>
+                        </div>
+                      </div>
+                    )}
+                  </div>
+                </div>
+              </motion.div>
+
+              {renderNeonDivider('#00F0FF')}
+
+              {/* SECTION 04: Sticker Seti */}
+              <motion.div 
+                initial={{ opacity: 0, y: 40, filter: 'blur(8px)' }}
+                whileInView={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
+                viewport={{ once: true, margin: "-120px" }}
+                transition={{ duration: 0.9, ease: [0.16, 1, 0.3, 1] }}
+                className="flex flex-col lg:flex-row-reverse items-center gap-8 lg:gap-16 relative"
+              >
+                {/* Subtle glowing nested triangle outlines background */}
+                {renderNestedTrianglesBackground('#00F0FF')}
+
+                <div className="lg:w-5/12 flex flex-col justify-center py-6 relative z-10">
+                  <div className="flex items-center gap-4 mb-6 select-none">
+                    <span className="font-sans font-black text-7xl sm:text-8xl text-[#00F0FF]/15 leading-none select-none">04</span>
+                    <div className="flex flex-col">
+                      <span className="font-mono text-[8.5px] text-[#00F0FF] tracking-[0.3em] font-bold uppercase mb-1">// R&D TECHATHON 2026</span>
+                      <h3 className="font-sans font-black text-2xl sm:text-3xl text-white uppercase tracking-tight flex items-center gap-2">
+                        <span className="text-[#00F0FF] font-mono mr-1">//</span> Sticker Seti
+                      </h3>
+                    </div>
+                  </div>
+                  <p className="font-sans text-sm sm:text-base text-white/60 leading-relaxed font-light mb-6">
+                    Teknoloji ve yazılım dünyasının içgörülerinden (Data Speaks We Build, Everything Is Under Ctrl vb.) ilham alan eğlenceli ve dinamik bir sticker seti kurguladım. Kod pencereleri, uyarı tabelaları ve post-it formlarından ilham alan bu tasarımlarla, katılımcıların günlük iş akışlarındaki mizahı ve Techathon heyecanını etkinlik sonrasında da yaşamaya devam etmelerini hedefledim.
+                  </p>
+                </div>
+
+                <div className="lg:w-7/12 relative z-10 w-full">
+                  <ImageUploadPlaceholder 
+                    image={rdStickerImage}
+                    onUpload={setRdStickerImage}
+                    fileInputRef={rdStickerFileInputRef}
+                    title="Sticker Seti"
+                    aspect="aspect-[330/470]"
+                    objectFit="contain"
+                    isLocked={isLocked}
+                    onLockedClick={() => handleLockedClick(rdStickerFileInputRef)}
+                  />
+                </div>
+              </motion.div>
+
+              {renderNeonDivider('#00F0FF')}
+
+              {/* SECTION 05: Tişört Tasarımı */}
+              <motion.div 
+                initial={{ opacity: 0, y: 40, filter: 'blur(8px)' }}
+                whileInView={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
+                viewport={{ once: true, margin: "-120px" }}
+                transition={{ duration: 0.9, ease: [0.16, 1, 0.3, 1] }}
+                className="flex flex-col lg:flex-row items-center gap-8 lg:gap-16 relative"
+              >
+                <div className="lg:w-5/12 flex flex-col justify-center py-6 relative z-10">
+                  <div className="flex items-center gap-4 mb-6 select-none">
+                    <span className="font-sans font-black text-7xl sm:text-8xl text-[#00F0FF]/15 leading-none select-none">05</span>
+                    <div className="flex flex-col">
+                      <span className="font-mono text-[8.5px] text-[#00F0FF] tracking-[0.3em] font-bold uppercase mb-1">// R&D TECHATHON 2026</span>
+                      <h3 className="font-sans font-black text-2xl sm:text-3xl text-white uppercase tracking-tight flex items-center gap-2">
+                        <span className="text-[#00F0FF] font-mono mr-1">//</span> Tişört Tasarımı
+                      </h3>
+                    </div>
+                  </div>
+                  <p className="font-sans text-sm sm:text-base text-white/60 leading-relaxed font-light mb-6">
+                    Tişörtün ön yüzünde Techathon’un soyut ve dijital desenlerini kullanırken, arka yüzünde veri hiyerarşisini ve "Innovation" vizyonunu simgeleyen teknik şemalar ve ikonografik bir yerleşim tercih ettim. Amacım, hem etkinlik esnasında ekiplerin bir bütün olarak görünmesini sağlamak hem de etkinlik sonrasında günlük hayatta da kullanılabilecek estetik ve zamansız bir ürün ortaya koymaktı.
+                  </p>
+
+                  <div className="grid grid-cols-2 gap-4 mt-2">
+                    <div>
+                      <span className="font-mono text-[8px] tracking-widest text-white/40 uppercase block mb-2">// ÖN TASARIM</span>
+                      <ImageUploadPlaceholder 
+                        image={rdTshirtFrontImage}
+                        onUpload={setRdTshirtFrontImage}
+                        fileInputRef={rdTshirtFrontFileInputRef}
+                        title="Tişört Ön Tasarım"
+                        aspect="aspect-[1/1]"
+                        objectFit="contain"
+                        isLocked={isLocked}
+                        onLockedClick={() => handleLockedClick(rdTshirtFrontFileInputRef)}
+                      />
+                    </div>
+                    <div>
+                      <span className="font-mono text-[8px] tracking-widest text-white/40 uppercase block mb-2">// ARKA TASARIM</span>
+                      <ImageUploadPlaceholder 
+                        image={rdTshirtBackImage}
+                        onUpload={setRdTshirtBackImage}
+                        fileInputRef={rdTshirtBackFileInputRef}
+                        title="Tişört Arka Tasarım"
+                        aspect="aspect-[1/1]"
+                        objectFit="contain"
+                        isLocked={isLocked}
+                        onLockedClick={() => handleLockedClick(rdTshirtBackFileInputRef)}
+                      />
+                    </div>
+                  </div>
+                </div>
+
+                <div className="lg:w-7/12 relative z-10 w-full flex flex-col items-center">
+                  <span className="font-mono text-[8px] tracking-[0.2em] text-[#00F0FF] uppercase mb-3 block">// İNTERAKTİF 3D MODEL ÖNİZLEME (Sürükle)</span>
+                  <div className="w-full aspect-[4/3] rounded-2xl border border-white/5 bg-black/40 overflow-hidden relative shadow-2xl">
+                    <RdTshirt3DViewer frontImage={rdTshirtFrontImage} backImage={rdTshirtBackImage} />
+                  </div>
+                </div>
+              </motion.div>
+
+              {renderNeonDivider('#00F0FF')}
+
+              {/* SECTION 06: Yönlendirmeler */}
+              <motion.div 
+                initial={{ opacity: 0, y: 40, filter: 'blur(8px)' }}
+                whileInView={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
+                viewport={{ once: true, margin: "-120px" }}
+                transition={{ duration: 0.9, ease: [0.16, 1, 0.3, 1] }}
+                className="flex flex-col lg:flex-row items-center gap-8 lg:gap-16 relative"
+              >
+                {/* Subtle glowing nested triangle outlines background */}
+                {renderNestedTrianglesBackground('#00F0FF')}
+
+                <div className="lg:w-5/12 flex flex-col justify-center py-6 relative z-10">
+                  <div className="flex items-center gap-4 mb-6 select-none">
+                    <span className="font-sans font-black text-7xl sm:text-8xl text-[#00F0FF]/15 leading-none select-none">06</span>
+                    <div className="flex flex-col">
+                      <span className="font-mono text-[8.5px] text-[#00F0FF] tracking-[0.3em] font-bold uppercase mb-1">// R&D TECHATHON 2026</span>
+                      <h3 className="font-sans font-black text-2xl sm:text-3xl text-white uppercase tracking-tight flex items-center gap-2">
+                        <span className="text-[#00F0FF] font-mono mr-1">//</span> Yönlendirmeler
+                      </h3>
+                    </div>
+                  </div>
+                  <p className="font-sans text-sm sm:text-base text-white/60 leading-relaxed font-light mb-6">
+                    Yemek ve fuaye alanları gibi farklı fiziksel noktalarda kullanılmak üzere, alanın enerjisini yükselten dikey pano tasarımları kurguladım. "Enjoy Your Meal!" ve "Where Ideas Take Root and Grow" gibi motive edici mesajları neon ışık çizgileri ve derin perspektif etkileriyle destekleyerek mekan içindeki atmosferi yalnızca yönlendiren değil, deneyimi güçlendiren bir organizasyon öğesine dönüştürmeyi amaçladım.
+                  </p>
+                </div>
+
+                <div className="lg:w-7/12 relative z-10 w-full grid grid-cols-2 gap-4">
+                  <div>
+                    <span className="font-mono text-[8px] tracking-widest text-white/40 uppercase block mb-2 text-center">// DİKEY PANO 1</span>
+                    <ImageUploadPlaceholder 
+                      image={rdDirection1Image}
+                      onUpload={setRdDirection1Image}
+                      fileInputRef={rdDirection1FileInputRef}
+                      title="Dikey Pano 1"
+                      aspect="aspect-[180/520]"
+                      objectFit="contain"
+                      isLocked={isLocked}
+                      onLockedClick={() => handleLockedClick(rdDirection1FileInputRef)}
+                    />
+                  </div>
+                  <div>
+                    <span className="font-mono text-[8px] tracking-widest text-white/40 uppercase block mb-2 text-center">// DİKEY PANO 2</span>
+                    <ImageUploadPlaceholder 
+                      image={rdDirection2Image}
+                      onUpload={setRdDirection2Image}
+                      fileInputRef={rdDirection2FileInputRef}
+                      title="Dikey Pano 2"
+                      aspect="aspect-[180/520]"
+                      objectFit="contain"
+                      isLocked={isLocked}
+                      onLockedClick={() => handleLockedClick(rdDirection2FileInputRef)}
+                    />
+                  </div>
+                </div>
+              </motion.div>
+            </>
+          )}
               </div>
 
               <div className="max-w-6xl mx-auto border-t border-white/5 pt-16 mt-20 text-center relative z-10 flex flex-col items-center gap-6">
